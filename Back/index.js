@@ -26,5 +26,5 @@ server.listen(3001, () => {
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  console.log('Sincronizacion con la base de datos');
+  console.log('Synced database');
 });
