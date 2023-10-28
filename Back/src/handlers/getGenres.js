@@ -4,7 +4,6 @@ const { pushGenresToDb } = require("../controllers/db/pushGenresToDb")
 const getGenres = async (request, response)=>{
     try {
         const genres = await searchGenresFromApi()
-        console.log(genres)
         const success = await pushGenresToDb(genres)
         return response.status(200).json(success)
     } catch (error) {
