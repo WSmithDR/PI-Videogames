@@ -9,8 +9,6 @@ videogames.get("/", getVideogames)
 
 videogames.get("/:idVideogame", getVideogameById)
 
-videogames.post("/", (request,response)=>{
-    response.json({message:"Probando el post"})
-})
+videogames.post("/", postVideogame)
 
 module.exports = videogames
