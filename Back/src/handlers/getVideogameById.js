@@ -1,12 +1,17 @@
 const { searchVideogameByIdFromApi } = require("../controllers/api/searchVidegameByIdFromApi")
-
+const { findVideogamesByIdFromDb } = require("../controllers/db/findVideogameByIdFromDb")
+const number = /^\d+$/
 const getVideogameById = async (request, response)=>{
-    let videogame = {}
     try {
+        let videogame = {}
         const {idVideogame} = request.params
-        const api = await searchVideogameByIdFromApi(idVideogame)
-        videogame = {...api}
-        if(!videogame) throw Error(`There's no a videogame with id: ${id}.`)
+        if(number.test(idVideogame)){
+            const api = await searchVideogameByIdFromApi(idVideogame)
+            videogame = {...api}
+        }else{
+            const db = await findVideogamesByIdFromDb(idVideogame)
+            videogame = {...db}
+        }
         return response.status(200).json(videogame)
     } catch (error) {
         return response.status(404).json({error: error.message})
