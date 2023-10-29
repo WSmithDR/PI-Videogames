@@ -9,7 +9,7 @@ const pushGenresToDb = async (info) => {
         })
     }
     
-    return `Genres added to database successfully!`
+    return Genre.findAll()
 }
 
 module.exports = {

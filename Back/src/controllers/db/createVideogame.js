@@ -1,4 +1,4 @@
-const {Videogame} = require("./../../db")
+const {Videogame, Genre} = require("./../../db")
 
 const createVideogame = async (
     name, 
@@ -6,17 +6,25 @@ const createVideogame = async (
     platforms, 
     image, 
     releaseDate, 
-    rating
-) => {
-    await Videogame.findOrCreate({
+    rating,
+    genres
+) => {  
+    const info = await Genre.findAll({
         where:{
+            name: genres
+        }
+    })
+
+    const newVideogame = await Videogame.create({
         name, 
         description, 
         platforms, 
         image, 
         releaseDate, 
         rating 
-    }})
+    })
+
+    await newVideogame.setGenres(info)
 
     const allVideogames = await Videogame.findAll()
 

@@ -2,7 +2,6 @@ const { findVideogamesFromApi } = require("../controllers/api/findVideogamesFrom
 const { searchVideogameByNameFromApi } = require("../controllers/api/searchVideogameByNameFromApi")
 const { findVideogameByNameFromDb } = require("../controllers/db/findVideogameByNameFromDb")
 const { findVideogamesFromDb } = require("../controllers/db/findVideogamesFromDb")
-
 const getVideogames = async (request, response)=>{
     try {
         const {name} = request.query
@@ -16,7 +15,7 @@ const getVideogames = async (request, response)=>{
         } else {
             const api = await findVideogamesFromApi()
             const db = await findVideogamesFromDb()
-            foundVideogames = [...api, ...db]
+            foundVideogames = [...db,...api]
         }
         return response.status(200).json(foundVideogames)
     } catch (error) {

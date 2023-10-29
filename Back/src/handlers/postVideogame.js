@@ -1,3 +1,4 @@
+const { checkVideogameExistenceInDb } = require("../controllers/db/checkVideogameExistenceInDb")
 const { createVideogame } = require("../controllers/db/createVideogame")
 
 const postVideogame = async (request, response)=>{
@@ -8,8 +9,14 @@ const postVideogame = async (request, response)=>{
         platforms, 
         image, 
         releaseDate, 
-        rating
+        rating,
+        genres
     } = request.body
+
+    const boludo =  await checkVideogameExistenceInDb(name)
+    console.log("Handler exists", boludo)
+    
+    if(boludo) throw Error(`${name} already exists in Db!`)
 
     const newVideogame = await createVideogame(
         name, 
@@ -17,7 +24,8 @@ const postVideogame = async (request, response)=>{
         platforms, 
         image, 
         releaseDate, 
-        rating
+        rating,
+        genres
     )
     return response.status(200).json(newVideogame)
   } catch (error) {

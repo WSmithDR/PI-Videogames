@@ -10,6 +10,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: DataTypes.UUIDV4
     },
+    created:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,7 +31,7 @@ module.exports = (sequelize) => {
       validate: {isUrl: true}
     },
     releaseDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
     rating: {

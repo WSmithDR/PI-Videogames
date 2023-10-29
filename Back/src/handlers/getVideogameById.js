@@ -1,5 +1,6 @@
 const { searchVideogameByIdFromApi } = require("../controllers/api/searchVidegameByIdFromApi")
 const { findVideogamesByIdFromDb } = require("../controllers/db/findVideogameByIdFromDb")
+const { cleanVideogamesPropsFromApi } = require("../utils/cleanVideogamesPropsFromApi")
 const number = /^\d+$/
 const getVideogameById = async (request, response)=>{
     try {
@@ -12,7 +13,8 @@ const getVideogameById = async (request, response)=>{
             const db = await findVideogamesByIdFromDb(idVideogame)
             videogame = {...db}
         }
-        return response.status(200).json(videogame)
+        if(Object.entries(videogame).length===0) throw Error("Videogame not found!")
+        response.status(200).json(videogame)
     } catch (error) {
         return response.status(404).json({error: error.message})
     }
