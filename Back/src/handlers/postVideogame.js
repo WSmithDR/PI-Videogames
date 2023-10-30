@@ -14,7 +14,6 @@ const postVideogame = async (request, response)=>{
     } = request.body
 
     const boludo =  await checkVideogameExistenceInDb(name)
-    console.log("Handler exists", boludo)
     
     if(boludo) throw Error(`${name} already exists in Db!`)
 

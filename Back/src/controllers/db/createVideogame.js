@@ -9,11 +9,6 @@ const createVideogame = async (
     rating,
     genres
 ) => {  
-    const info = await Genre.findAll({
-        where:{
-            name: genres
-        }
-    })
 
     const newVideogame = await Videogame.create({
         name, 
@@ -24,8 +19,15 @@ const createVideogame = async (
         rating 
     })
 
-    await newVideogame.setGenres(info)
-
+    genres.forEach(async (genre) => {
+        let find = await Genre.findAll({
+            where:{
+                name: genre
+            }
+        })
+        await newVideogame.addGenre(find)
+    })
+    
     const allVideogames = await Videogame.findAll()
 
     return allVideogames
