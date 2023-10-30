@@ -13,5 +13,5 @@ const findVideogameByNameFromDb = async (name) => {
 }
 
 module.exports = {
-    findVideogameByNameFromDb
+    findVideogameByNameFromDb,
 }
