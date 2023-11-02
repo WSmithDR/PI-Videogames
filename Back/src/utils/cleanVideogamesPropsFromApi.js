@@ -5,19 +5,22 @@ const cleanVideogamesPropsFromApi = (info) => {
                 name, 
                 description, 
                 platforms, 
-                image,
-                releaseDate,
-                rating 
+                background_image,
+                released,
+                rating,
+                genres 
             })=>{
+                const strsPlatforms = platforms.map(({platform})=>platform.name)
                 return {
                     id,
                     name,
                     created: false, 
                     description, 
-                    platforms, 
-                    image,
-                    releaseDate,
-                    rating
+                    platforms:strsPlatforms, 
+                    image: background_image,
+                    releaseDate: released,
+                    rating,
+                    genres
                 }
             })
         }else{

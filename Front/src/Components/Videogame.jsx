@@ -1,6 +1,7 @@
+import useOrdList from "../Hooks/useOrdList"
 
 
-const Videogame = (videogame) => {
+const Videogame = ({videogame}) => {
     const {
     id,
     name,
@@ -11,10 +12,10 @@ const Videogame = (videogame) => {
     rating 
     } = videogame
     return(
-        <div key={id}>
-            <p><strong>Name: </strong>{name}</p>
-            <p><strong>Description: </strong>{description}</p>
-            <p><strong>Platforms: </strong></p>
+        <div>
+            {name && <p><strong>Name: </strong>{name}</p>}
+            {description && <p><strong>Description: </strong>{description}</p>}
+            {platforms && <p><strong>Platforms: </strong>{useOrdList(platforms)}</p>}
             <p><strong>Released: </strong>{releaseDate}</p>
             <p><strong>Rating: </strong>{rating}</p>
             <img src={image} width="300px"/>
