@@ -1,8 +1,9 @@
-import Form from "../Components/Form"
+
+import CreateVideogame from './../Components/createVideogame';
 
 const FormPage = ()=>{
     return(
-        <Form/>
+        <CreateVideogame/>
     )
 }
 

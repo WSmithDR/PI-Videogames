@@ -1,8 +1,0 @@
-/* Form.module.css */
-.imageInput + .imagePreview {
-  display: none;
-}
-
-.imageInput:not(:empty) + .imagePreview {
-  display: block;
-}

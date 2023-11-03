@@ -13,10 +13,10 @@ const getVideogames = async (request, response)=>{
             foundVideogames = foundVideogames.slice(0,15)
             if(!foundVideogames.length) throw Error(`There are no videgames that contain the name: ${name}`)
         } else {
-            const api = await findVideogamesFromApi()
-            const db = await findVideogamesFromDb()
-            foundVideogames = [...db,...api]
-        }
+    const api = await findVideogamesFromApi()
+    const db = await findVideogamesFromDb()
+    foundVideogames = [...db,...api]
+}
         return response.status(200).json(foundVideogames)
     } catch (error) {
         return response.status(400).json({error: error.message})

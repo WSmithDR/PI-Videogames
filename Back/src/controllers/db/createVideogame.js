@@ -19,6 +19,8 @@ const createVideogame = async (
         rating 
     })
 
+    console.log(newVideogame)
+
     genres.forEach(async (genre) => {
         let find = await Genre.findAll({
             where:{

@@ -1,13 +1,12 @@
 const {Videogame} = require("./../../db")
 
 const checkVideogameExistenceInDb = async(name) => {
-    const pendejo = await Videogame.findOne({
+    const check = await Videogame.findOne({
         where:{
             name
         }
     })
-    console.log("probrando el exists: ", pendejo)
-    return pendejo ? true: false
+    return check ? true: false
 }
 
 module.exports = {

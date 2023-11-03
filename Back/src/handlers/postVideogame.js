@@ -13,9 +13,9 @@ const postVideogame = async (request, response)=>{
         genres
     } = request.body
 
-    const boludo =  await checkVideogameExistenceInDb(name)
+    const check =  await checkVideogameExistenceInDb(name)
     
-    if(boludo) throw Error(`${name} already exists in Db!`)
+    if(check) throw Error(`${name} already exists in Db!`)
 
     const newVideogame = await createVideogame(
         name, 
@@ -28,6 +28,7 @@ const postVideogame = async (request, response)=>{
     )
     return response.status(200).json(newVideogame)
   } catch (error) {
+    console.log(error.message)
     return response.status(400).json({error:error.message})
   }
 }

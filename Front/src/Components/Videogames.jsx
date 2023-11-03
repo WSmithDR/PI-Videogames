@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect } from "react"
 import Videogame from "./Videogame"
+import {useDispatch, useSelector} from "react-redux"
+import { getVideogamesByDefault } from "../redux/actions/actions"
 
 const Videogames = () =>{
-    const endpoint = `http://localhost:3001/videogames`
-    const [videogames, setVideogames] = useState([])
+    const dispatch = useDispatch()
+    const videogames = useSelector(state=>state.renderedVideogames)
     useEffect(()=>{
-        axios(endpoint)
-        .then(({data})=>setVideogames([...data]))
+        dispatch(getVideogamesByDefault())
     },[])
     
     return(

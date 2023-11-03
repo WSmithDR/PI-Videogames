@@ -4,9 +4,16 @@ const axios = require("axios")
 const { cleanVideogamesPropsFromApi } = require("../../utils/cleanVideogamesPropsFromApi")
 
 const findVideogamesFromApi = async () =>{
-    const {data} =  await axios(`${endpoint}?key=${API_KEY}`)
-    const info = cleanVideogamesPropsFromApi(data.results)
-    return info
+    let videogames = []
+    let page = 1
+    while (videogames.length<100){
+        const {data} =  await axios(`${endpoint}?key=${API_KEY}&page=${page}`)
+        const info = cleanVideogamesPropsFromApi(data.results)
+        videogames = [...videogames, ...info]
+        page++
+    }
+    console.log("****", videogames.length)
+    return videogames
 }
 
 module.exports = {findVideogamesFromApi}

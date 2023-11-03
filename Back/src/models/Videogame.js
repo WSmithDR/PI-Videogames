@@ -27,8 +27,8 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.STRING)
     },
     image:{
-      type: DataTypes.STRING,
-      validate: {isUrl: true}
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     releaseDate: {
       type: DataTypes.DATEONLY,
