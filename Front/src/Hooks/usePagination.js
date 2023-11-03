@@ -1,17 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from 'react';
 
-function usePagination(itemsPerPage, items) {
+const usePagination = (data, itemsPerPage) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentItems, setCurrentItems] = useState([]);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-
-  useEffect(() => {
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const slicedItems = items.slice(indexOfFirstItem, indexOfLastItem);
-    setCurrentItems(slicedItems);
-  }, [currentPage, items, itemsPerPage]);
+  const currentItems = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const nextPage = () => {
     if (currentPage < totalPages) {
@@ -25,13 +21,22 @@ function usePagination(itemsPerPage, items) {
     }
   };
 
-  return {
-    currentItems,
-    currentPage,
-    totalPages,
-    nextPage,
-    prevPage,
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
-}
+
+  return [
+    {
+      currentPage,
+      nextPage,
+      prevPage,
+      goToPage,
+      totalPages,
+    },
+    currentItems
+  ]
+};
 
 export default usePagination;
