@@ -1,132 +1,95 @@
-import { useState } from "react"
-import useGenres from "../Hooks/useGenres"
+import React, { useState } from "react";
+import useData from "../Hooks/useData";
 import {
   StyledForm,
-  GenreList,
-  GenreListItem,
-  GenreCheckbox,
+  ListContainer,
+  ListItem,
+  Checkbox,
   StarRating
-} from "../Styles/createVideogame"
-import { useDispatch } from "react-redux"
-import { createVideogame } from "../redux/actions/actions"
+} from "../Styles/createVideogame";
+import { useDispatch } from "react-redux";
+import { createVideogame } from "../redux/actions/actions";
 
 const CreateVideogame = () => {
-  const genres = useGenres()
+  const genres = useData("http://localhost:3001/genres");
+  const platforms = useData("http://localhost:3001/platforms");
   const [newVideogame, setNewVideogame] = useState({
     name: "",
     image: "",
     description: "",
     platforms: [],
     releaseDate: "",
-    rating: 1,
+    rating: 0,
     genres: []
-  })
+  });
 
-  const [inputPlatform, setInputPlatform] = useState("")
-
-  
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     setNewVideogame({
       ...newVideogame,
       [event.target.name]: event.target.value
-    })
-  }
-  
-  const changeUpload = async event => {
-    const file = event.target.files[0]
-    
+    });
+  };
+
+  const changeUpload = async (event) => {
+    const file = event.target.files[0];
+
     if (file) {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = () => {
-        const base64String = reader.result.split(",")[1]
-        setNewVideogame(videogame => ({
+        const base64String = reader.result.split(",")[1];
+        setNewVideogame((videogame) => ({
           ...videogame,
           image: `data:image/jpeg;base64,${base64String}`
-        }))
-      }
-      reader.readAsDataURL(file)
+        }));
+      };
+      reader.readAsDataURL(file);
     }
-  }
-  
-  const handleAddPlatform = event => {
-    setInputPlatform(event.target.value)
-  }
-  
-  const addPlatformToForm = () => {
-    if (inputPlatform.trim() !== "") {
-      const newPlatform = inputPlatform.trim()
+  };
+
+  const toggleOption = (option, type) => {
+    if (newVideogame[type].includes(option)) {
       setNewVideogame({
         ...newVideogame,
-        platforms: [...newVideogame.platforms, newPlatform]
-      })
-      setInputPlatform("")
-    }
-  }
-  
-  const removePlatform = platformToRemove => {
-    const filtered = newVideogame.platforms.filter(
-      platform => platform !== platformToRemove
-      )
+        [type]: newVideogame[type].filter((selectedOption) => selectedOption !== option)
+      });
+    } else {
       setNewVideogame({
         ...newVideogame,
-        platforms: filtered
-      })
+        [type]: [...newVideogame[type], option]
+      });
     }
-    
-    const toggleGenre = genre => {
-      if (newVideogame.genres.includes(genre)) {
-        setNewVideogame({
-          ...newVideogame,
-          genres: newVideogame.genres.filter(
-            selectedGenre => selectedGenre !== genre
-            )
-          })
-        } else {
-          setNewVideogame({
-            ...newVideogame,
-            genres: [...newVideogame.genres, genre]
-          })
-        }
-      }
-      
-      const handleRatingChange = rating => {
-        setNewVideogame({
-          ...newVideogame,
-          rating
-        })
-      }
-      
-      const renderStars = () => {
-        const stars = []
-        for (let i = 1; i <= 5; i++) {
-          const filled = newVideogame.rating >= i ? 1 : 0
-          stars.push(
-            <StarRating
-            key={i}
-            filled={filled}
-            onClick={() => handleRatingChange(i)}
-            >
+  };
+
+  const handleRatingChange = (rating) => {
+    setNewVideogame({
+      ...newVideogame,
+      rating
+    });
+  };
+
+  const renderStars = () => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const filled = newVideogame.rating >= i ? 1 : 0;
+      stars.push(
+        <StarRating
+          key={i}
+          filled={filled}
+          onClick={() => handleRatingChange(i)}
+        >
           {filled === 1 ? "★" : "☆"}
         </StarRating>
-      )
+      );
     }
-    return stars
-  }
-  const dispatch = useDispatch()
-  
-  const handleSubmit = event => {
-    event.preventDefault()
-    dispatch(createVideogame(newVideogame))
-    // setNewVideogame({
-    //   name: "",
-    //   image: "",
-    //   description: "",
-    //   platforms: [],
-    //   releaseDate: "",
-    //   rating: 1,
-    //   genres: []
-    // })
-  }
+    return stars;
+  };
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createVideogame(newVideogame));
+  };
 
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -148,7 +111,11 @@ const CreateVideogame = () => {
           autoComplete="off"
           onChange={changeUpload}
         />
-        <img src={newVideogame.image ? newVideogame.image : "Default image"} alt="" width="100px" />
+        <img
+          src={newVideogame.image ? newVideogame.image : "Default image"}
+          alt=""
+          width="100px"
+        />
       </div>
       <div>
         <label>Description:</label>
@@ -160,21 +127,34 @@ const CreateVideogame = () => {
         />
       </div>
       <div>
-        <label>Platforms:</label>
-        <input
-          name="platforms"
-          type="text"
-          value={inputPlatform}
-          onChange={handleAddPlatform}
-        />
-        <button type="button" onClick={addPlatformToForm}>Add!</button>
-        <ul>
-          {newVideogame.platforms.map((platform, index) => (
-            <li key={index}>{platform}{" "}
-              <button type="button" onClick={() => removePlatform(platform)}>x</button>
-            </li>
+        <label>Genres:</label>
+        <ListContainer>
+          {genres.map((genre, index) => (
+            <ListItem key={index}>
+              <Checkbox
+                type="checkbox"
+                onChange={() => toggleOption(genre, "genres")}
+                checked={newVideogame.genres.includes(genre)}
+              />
+              {genre}
+            </ListItem>
           ))}
-        </ul>
+        </ListContainer>
+      </div>
+      <div>
+        <label>Platforms:</label>
+        <ListContainer>
+          {platforms.map((platform, index) => (
+            <ListItem key={index} className="platform-item">
+              <Checkbox
+                type="checkbox"
+                onChange={() => toggleOption(platform, "platforms")}
+                checked={newVideogame.platforms.includes(platform)}
+              />
+              {platform}
+            </ListItem>
+          ))}
+        </ListContainer>
       </div>
       <div>
         <label>Release Date:</label>
@@ -193,31 +173,14 @@ const CreateVideogame = () => {
           max="5"
           step="0.1"
           name="rating"
-          onChange={e => handleRatingChange(parseFloat(e.target.value))}
+          onChange={(e) => handleRatingChange(parseFloat(e.target.value))}
           value={newVideogame.rating}
         />
-        <div>
-          {renderStars()}
-        </div>
+        <div>{renderStars()}</div>
       </StarRating>
-      <div>
-        <label>Genres:</label>
-        <GenreList>
-          {genres.map((genre, index) => (
-            <GenreListItem key={index}>
-              <GenreCheckbox
-                type="checkbox"
-                onChange={() => toggleGenre(genre)}
-                checked={newVideogame.genres.includes(genre)}
-              />
-              {genre}
-            </GenreListItem>
-          ))}
-        </GenreList>
-      </div>
       <button type="submit">Create Videogame!</button>
     </StyledForm>
-  )
-}
+  );
+};
 
-export default CreateVideogame
+export default CreateVideogame;
