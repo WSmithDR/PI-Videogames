@@ -32,10 +32,8 @@ const HomePage = () => {
   };
   
   const handleOrderOption = (event) => {
-    const params = event.target.value.split(" ")
-    const [prop, way] = params
+    const [prop, way] = event.target.value.split(" ")
     setOrder({prop, way})
-    console.log("***",prop, way)
   }
 
   useEffect(() => {

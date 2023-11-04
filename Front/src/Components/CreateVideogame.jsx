@@ -121,6 +121,15 @@ const CreateVideogame = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(createVideogame(newVideogame));
+    setNewVideogame({
+      name: "",
+      image: "",
+      description: "",
+      platforms: [],
+      releaseDate: "",
+      rating: 0,
+      genres: []
+    })
   };
 
   const deleteImg = () =>{

@@ -1,6 +1,6 @@
 import { useParams } from "react-router"
-import useVideogame from "../Hooks/useVideogame"
-import useOrdList from './../Hooks/useOrdList';
+import useVideogame from "../Hooks/useVideogame";
+import Platforms from "./Platforms";
 
 const VdgDetail = () => {
     const {id} = useParams()
@@ -18,15 +18,13 @@ const VdgDetail = () => {
     return(
         <div>
             {name && <p><strong>Name: </strong>{name}</p>}
+            <img src={image} width="300px"/>
             {description && <p><strong>Description: </strong>{description}</p>}
-            {platforms && <details>
-                <summary><strong>Platforms:</strong></summary>
-                {useOrdList(platforms)}
-                </details>}
+            <strong>Platforms:</strong>
+            <Platforms platforms={platforms}/>
             <p><strong>Released: </strong>
             {releaseDate}</p>
             <p><strong>Rating: </strong>{rating}</p>
-            <img src={image} width="300px"/>
         </div>
     )
 }

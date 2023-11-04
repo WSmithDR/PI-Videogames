@@ -1,8 +1,16 @@
+import React from "react";
+import { PageContainer, Title, EnterButton } from "../Styles/landingPage";
+import { useNavigate } from "react-router-dom";
 
-const LandingPage = ()=>{
-    //deberás crear una página de inicio o bienvenida con:
-    //Alguna imagen de fondo representativa al proyecto.
-    //Botón para ingresar a la home page.
-}
+const LandingPage = () => {
+  const navigate = useNavigate();
 
-export default LandingPage
+  return (
+    <PageContainer>
+      <Title>Welcome to the World of Video Games</Title>
+      <EnterButton onClick={() => navigate("/home")}>Enter</EnterButton>
+    </PageContainer>
+  );
+};
+
+export default LandingPage;

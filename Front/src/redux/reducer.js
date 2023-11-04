@@ -72,7 +72,7 @@ const reducer = (state=initialState, {type, payload}) => {
                     }
                 }
             }
-            return {...state, renderedVideogames:[...filtered].sort((a,b)=>sortVideogames(a,b)) 
+            return {...state, renderedVideogames:[...filtered]?.sort((a,b)=>sortVideogames(a,b)) 
             }
         
         default: {
