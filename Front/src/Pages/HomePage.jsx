@@ -15,10 +15,10 @@ const HomePage = ()=>{
     dispatch(getVideogamesByDefault());
   }, []);
 
-  const [pagination, currentVideogames] = usePagination(videogames, 15, currentPage);
+  const [pagination, currentVideogames] = usePagination(videogames, 10, currentPage);
     return (
         <div>
-            <Videogames currentVideogames={currentVideogames}/>
+            <Videogames videogames={currentVideogames}/>
             <PaginationButtons pagination={pagination} />
         </div>
     )

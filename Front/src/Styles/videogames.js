@@ -7,6 +7,6 @@ export const VideogameContainer = styled.div`
 `;
 
 export const VideogameItem = styled.div`
-  width: calc(33.33% - 10px);
+  width: calc(20% - 10px);
   margin-bottom: 20px;
 `;

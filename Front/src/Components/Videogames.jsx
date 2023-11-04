@@ -2,11 +2,11 @@ import Videogame from "./Videogame";
 import { VideogameContainer, VideogameItem } from "../Styles/videogames";
 
 
-const Videogames = ({currentVideogames}) => {
+const Videogames = ({videogames}) => {
   return (
       <VideogameContainer>
-        {currentVideogames &&
-          currentVideogames.map((videogame, index) => (
+        {videogames &&
+          videogames.map((videogame, index) => (
             <VideogameItem key={index}>
               <Videogame videogame={videogame} />
             </VideogameItem>
