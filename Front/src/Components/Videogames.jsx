@@ -8,13 +8,15 @@ import PaginationButtons from "./PaginationButtons"
 const Videogames = () =>{
     const dispatch = useDispatch()
     const videogames = useSelector(state=>state.renderedVideogames)
+    const currentPage = useSelector(state => state.currentPage)
     useEffect(()=>{
         dispatch(getVideogamesByDefault())
     },[])
-    const [pagination, currentVideogames] = usePagination(videogames, 10)
+    const [pagination, currentVideogames] = usePagination(videogames, 15, currentPage)
     return(
         <div>
-            {currentVideogames && currentVideogames.map((videogame, index) => <Videogame key={index} videogame={videogame}/>)}
+            {currentVideogames && currentVideogames.map((videogame, index) => (
+                <Videogame key={index} videogame={videogame}/>))}
             <PaginationButtons pagination={pagination}/> 
         </div>
     )

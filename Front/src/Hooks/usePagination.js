@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-const usePagination = (data, itemsPerPage) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const usePagination = (data, itemsPerPage, currentPageFromGS) => {
+  
+  const [currentPage, setCurrentPage] = useState(currentPageFromGS);
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const currentItems = data.slice(

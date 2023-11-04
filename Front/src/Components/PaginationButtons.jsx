@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCurrentPage } from '../redux/actions/actions';
 
 const PaginationButtons = ({ pagination }) => {
   const { currentPage, totalPages, nextPage, prevPage, goToPage } = pagination;
   const buttonsToShow = 5
   const [start, setStart] = useState(1);
+  const dispatch = useDispatch()
 
   const nextRange = () => {
     if (start + buttonsToShow <= totalPages) {
@@ -20,9 +23,9 @@ const PaginationButtons = ({ pagination }) => {
   };
 
   useEffect(() => {
-    // Actualiza el rango al cambiar de página.
     const newStart = Math.floor((currentPage - 1) / buttonsToShow) * buttonsToShow + 1;
     setStart(newStart);
+    dispatch(setCurrentPage(currentPage))
   }, [currentPage, buttonsToShow]);
 
   return (
