@@ -54,23 +54,35 @@ const CreateVideogame = () => {
           ...videogame,
           image: `data:image/jpeg;base64,${base64String}`
         }));
+        const errors = validate({
+          ...newVideogame,
+          image: `data:image/jpeg;base64,${base64String}`
+        })
+    
+        setFormErrors({...errors})
       };
       reader.readAsDataURL(file);
     }
   };
   
   const toggleOption = (option, type) => {
+    let options = {}
     if (newVideogame[type].includes(option)) {
-      setNewVideogame({
-        ...newVideogame,
-        [type]: newVideogame[type].filter((selectedOption) => selectedOption !== option)
-      });
+      options = {...newVideogame,
+      [type]: newVideogame[type].filter((selectedOption) => selectedOption !== option)}
+
+      setNewVideogame(options);
     } else {
-      setNewVideogame({
+      options = {
         ...newVideogame,
         [type]: [...newVideogame[type], option]
-      });
+      }
+      setNewVideogame(options);
     }
+
+    const errors = validate(options)
+
+    setFormErrors({...errors})
   };
 
   const handleRatingChange = (rating) => {
@@ -78,6 +90,13 @@ const CreateVideogame = () => {
       ...newVideogame,
       rating
     });
+
+    const errors = validate({
+      ...newVideogame,
+      rating
+    })
+
+    setFormErrors({...errors})
   };
 
   const renderStars = () => {
@@ -131,7 +150,7 @@ const CreateVideogame = () => {
           alt=""
           width="100px"
           />
-        {formErrors.name && <Errors name={formErrors.name}/>}
+        {formErrors.image && <Errors name={formErrors.image}/>}
       </div>
       <div>
         <label>Description:</label>
@@ -148,7 +167,7 @@ const CreateVideogame = () => {
       </div>
       <div>
         <label>Genres:</label>
-        {formErrors.name && <Errors name={formErrors.name}/>}
+        {formErrors.genres && <Errors name={formErrors.genres}/>}
         <ListContainer>
           {genres.map((genre, index) => (
             <ListItem key={index}>
@@ -164,7 +183,7 @@ const CreateVideogame = () => {
       </div>
       <div>
         <label>Platforms:</label>
-        {formErrors.name && <Errors name={formErrors.name}/>}
+        {formErrors.platforms && <Errors name={formErrors.platforms}/>}
         <ListContainer>
           {platforms.map((platform, index) => (
             <ListItem key={index} className="platform-item">
@@ -186,7 +205,7 @@ const CreateVideogame = () => {
           onChange={handleInputChange}
           value={newVideogame.releaseDate}
         />
-        {formErrors.name && <Errors name={formErrors.name}/>}
+        {formErrors.releaseDate && <Errors name={formErrors.releaseDate}/>}
       </div>
       <StarRating>
         <label>Rating:</label>
@@ -196,10 +215,10 @@ const CreateVideogame = () => {
           max="5"
           step="0.1"
           name="rating"
-          onChange={(e) => handleRatingChange(parseFloat(e.target.value))}
+          onChange={(event) => handleRatingChange(parseFloat(event.target.value))}
           value={newVideogame.rating}
         />
-        {formErrors.name && <Errors name={formErrors.name}/>}
+        {formErrors.rating && <Errors name={formErrors.rating}/>}
         <div>{renderStars()}</div>
       </StarRating>
       <button type="submit">Create Videogame!</button>
