@@ -1,4 +1,4 @@
-const {Videogame} = require("./../../db")
+const {Videogame, Genre, Platform} = require("./../../db")
 
 const {Op} = require("sequelize")
 
@@ -8,7 +8,15 @@ const findVideogameByNameFromDb = async (name) => {
             name: {
                 [Op.iLike]: `%${name}%`
             }
-        }
+        },
+        include: [
+            {
+                model: Genre
+            },
+            {
+                model: Platform
+            }
+        ]
     })
 }
 

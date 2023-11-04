@@ -10,13 +10,13 @@ const cleanVideogamesPropsFromApi = (info) => {
                 rating,
                 genres 
             })=>{
-                const strsPlatforms = platforms.map(({platform})=>platform.name)
+                //const strsPlatforms = platforms.map(({platform})=>platform.name)
                 return {
                     id,
                     name,
                     created: false, 
                     description:description_raw, 
-                    platforms:strsPlatforms, 
+                    platforms,
                     image: background_image,
                     releaseDate: released,
                     rating,
@@ -35,13 +35,13 @@ const cleanVideogamesPropsFromApi = (info) => {
                 genres
             } = info
 
-            const strsPlatforms = platforms.map(({platform})=>platform.name)
+            //const strsPlatforms = platforms.map(({platform})=>platform.name)
             return {
                 id,
                 name,
                 created: false, 
                 description: description_raw, 
-                platforms: strsPlatforms, 
+                platforms,
                 image: background_image,
                 releaseDate: released,
                 rating,

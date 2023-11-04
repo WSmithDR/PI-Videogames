@@ -1,4 +1,4 @@
-const {Videogame, Genre} = require("./../../db")
+const {Videogame, Genre, Platform} = require("./../../db")
 
 const createVideogame = async (
     name, 
@@ -13,21 +13,27 @@ const createVideogame = async (
     const newVideogame = await Videogame.create({
         name, 
         description, 
-        platforms, 
         image, 
         releaseDate, 
         rating 
     })
 
-    console.log(newVideogame)
-
     genres.forEach(async (genre) => {
-        let find = await Genre.findAll({
+        const found = await Genre.findAll({
             where:{
                 name: genre
             }
         })
-        await newVideogame.addGenre(find)
+        await newVideogame.addGenre(found)
+    })
+
+    platforms.forEach(async (platform) => {
+        const found = await Platform.findAll({
+            where: {
+                name: platform
+            }
+        })
+        await newVideogame.addPlatform(found)
     })
     
     const allVideogames = await Videogame.findAll()

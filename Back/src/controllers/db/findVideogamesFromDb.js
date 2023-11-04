@@ -1,11 +1,16 @@
-const {Videogame, Genre} = require("./../../db")
+const {Videogame, Genre, Platform} = require("./../../db")
 
 
 const findVideogamesFromDb = async () => {
     const allVideogames =  await Videogame.findAll({
-        include:{
-            model:Genre
-        }
+        include:[
+            {
+                model:Genre,
+            },
+            {
+                model: Platform
+            }
+        ]
     })
     return allVideogames
 }

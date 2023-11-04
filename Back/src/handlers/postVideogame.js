@@ -28,7 +28,6 @@ const postVideogame = async (request, response)=>{
     )
     return response.status(200).json(newVideogame)
   } catch (error) {
-    console.log(error.message)
     return response.status(400).json({error:error.message})
   }
 }

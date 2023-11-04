@@ -1,10 +1,11 @@
 const { searchPlatformsFromApi } = require("../controllers/api/searchPlatformsFromApi")
+const { pushPlatformsToDb } = require("../controllers/db/pushPlatformsToDb")
 
 const getPlatforms = async (request, response)=>{
     try {
-        const platforms = await searchPlatformsFromApi()
-        console.log(platforms)
-        return response.status(200).json(platforms)
+        const api = await searchPlatformsFromApi()
+        const db = await pushPlatformsToDb(api)
+        return response.status(200).json(db)
     } catch (error) {
         return response.status(500).json({error: error.message})
     }

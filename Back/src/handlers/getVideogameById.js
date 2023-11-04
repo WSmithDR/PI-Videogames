@@ -1,6 +1,5 @@
 const { searchVideogameByIdFromApi } = require("../controllers/api/searchVidegameByIdFromApi")
 const { findVideogamesByIdFromDb } = require("../controllers/db/findVideogameByIdFromDb")
-const { cleanVideogamesPropsFromApi } = require("../utils/cleanVideogamesPropsFromApi")
 const number = /^\d+$/
 const getVideogameById = async (request, response)=>{
     try {
