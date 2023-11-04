@@ -1,4 +1,4 @@
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./actions/types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./actions/types"
 
 const initialState = {
     backUpVideogames:[],
@@ -30,6 +30,50 @@ const reducer = (state=initialState, {type, payload}) => {
             return {...state,
                 itemsPerPage: payload
         }
+
+        case RENDER_VIDEOGAMES: 
+        const {filter, order} = payload
+        console.log(order)
+            let filtered = [...state.backUpVideogames].filter(
+                videogame => {
+                    return( 
+                        (filter.genre==="all"
+                        ? true
+                        : videogame.Genres?.some(genre=>genre.name===filter.genre)
+                        )&&(filter.created==="all"
+                        ? true
+                        : filter.created==="true"? videogame.created:!videogame.created
+                        )
+                    )
+                }
+            )
+            const sortVideogames = (a,b) => {
+                const {prop, way} = order
+                if(prop==="rating"){
+                    if(way==="A"){
+                        return(
+                            a.rating - b.rating)
+                    }
+                    if(way==="D"){
+                        return(
+                            b.rating - a.rating)
+                    }
+                }
+                if(prop==="name"){
+                    if(way==="A"){
+                        return( 
+                            a.name.localeCompare(b.name)
+                        )
+                    }
+                    if(way==="D"){
+                        return( 
+                            b.name.localeCompare(a.name)
+                        )
+                    }
+                }
+            }
+            return {...state, renderedVideogames:[...filtered].sort((a,b)=>sortVideogames(a,b)) 
+            }
         
         default: {
             return {...state}

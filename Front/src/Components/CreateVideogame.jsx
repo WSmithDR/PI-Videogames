@@ -25,7 +25,7 @@ const CreateVideogame = () => {
     genres: []
   });
 
-  const [formErrors, setFormErrors] = useState({})
+  const [formErrors, setFormErrors] = useState({k:"sentinel"})
   
   const validate = useValidation
   
@@ -123,6 +123,16 @@ const CreateVideogame = () => {
     dispatch(createVideogame(newVideogame));
   };
 
+  const deleteImg = () =>{
+    setNewVideogame({...newVideogame, image:""})
+    const errors = validate({
+      ...newVideogame,
+      image:""
+    })
+
+    setFormErrors({...errors})
+  }
+
 
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -145,11 +155,14 @@ const CreateVideogame = () => {
           autoComplete="off"
           onChange={changeUpload}
         />
-        <img
-          src={newVideogame.image ? newVideogame.image : "Default image"}
-          alt=""
-          width="100px"
-          />
+        {newVideogame.image && <div>
+          <img
+            src={newVideogame.image ? newVideogame.image : "Default image"}
+            alt=""
+            width="100px"
+            />
+            <button onClick={()=>deleteImg()}>Delete</button>
+        </div>}
         {formErrors.image && <Errors name={formErrors.image}/>}
       </div>
       <div>
@@ -221,7 +234,7 @@ const CreateVideogame = () => {
         {formErrors.rating && <Errors name={formErrors.rating}/>}
         <div>{renderStars()}</div>
       </StarRating>
-      <button type="submit">Create Videogame!</button>
+      {Object.keys(formErrors).length === 0 && <button type="submit">Create Videogame!</button>}
     </StyledForm>
   );
 };

@@ -20,7 +20,7 @@ const cleanVideogamesPropsFromApi = (info) => {
                     image: background_image,
                     releaseDate: released,
                     rating,
-                    genres
+                    Genres: genres
                 }
             })
         }else{
@@ -45,7 +45,7 @@ const cleanVideogamesPropsFromApi = (info) => {
                 image: background_image,
                 releaseDate: released,
                 rating,
-                genres
+                Gneres:genres
             }
         }
 }

@@ -1,5 +1,5 @@
+import CreateVideogame from "../Components/CreateVideogame"
 
-import CreateVideogame from './../Components/createVideogame';
 
 const FormPage = ()=>{
     return(
