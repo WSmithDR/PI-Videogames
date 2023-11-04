@@ -9,6 +9,8 @@ import {
 } from "../Styles/createVideogame";
 import { useDispatch } from "react-redux";
 import { createVideogame } from "../redux/actions/actions";
+import useValidation from "../Hooks/useValidation";
+import { Errors } from "./Errors";
 
 const CreateVideogame = () => {
   const genres = useData("http://localhost:3001/genres");
@@ -23,11 +25,22 @@ const CreateVideogame = () => {
     genres: []
   });
 
+  const [formErrors, setFormErrors] = useState({})
+  
+  const validate = useValidation
+  
   const handleInputChange = (event) => {
     setNewVideogame({
       ...newVideogame,
       [event.target.name]: event.target.value
     });
+
+    const errors = validate({
+      ...newVideogame,
+      [event.target.name]: event.target.value
+    })
+
+    setFormErrors({...errors})
   };
 
   const changeUpload = async (event) => {
@@ -45,7 +58,7 @@ const CreateVideogame = () => {
       reader.readAsDataURL(file);
     }
   };
-
+  
   const toggleOption = (option, type) => {
     if (newVideogame[type].includes(option)) {
       setNewVideogame({
@@ -91,6 +104,7 @@ const CreateVideogame = () => {
     dispatch(createVideogame(newVideogame));
   };
 
+
   return (
     <StyledForm onSubmit={handleSubmit}>
       <div>
@@ -101,6 +115,7 @@ const CreateVideogame = () => {
           onChange={handleInputChange}
           value={newVideogame.name}
         />
+        {formErrors.name && <Errors name={formErrors.name}/>}
       </div>
       <div>
         <label>Image:</label>
@@ -115,19 +130,25 @@ const CreateVideogame = () => {
           src={newVideogame.image ? newVideogame.image : "Default image"}
           alt=""
           width="100px"
-        />
+          />
+        {formErrors.name && <Errors name={formErrors.name}/>}
       </div>
       <div>
         <label>Description:</label>
-        <textarea
-          type="text"
-          name="description"
-          onChange={handleInputChange}
-          value={newVideogame.description}
-        />
+        <div>
+          <textarea
+            type="text"
+            name="description"
+            cols="30"
+            onChange={handleInputChange}
+            value={newVideogame.description}
+          />
+        </div>
+      {formErrors.description && <Errors name={formErrors.description}/>}  
       </div>
       <div>
         <label>Genres:</label>
+        {formErrors.name && <Errors name={formErrors.name}/>}
         <ListContainer>
           {genres.map((genre, index) => (
             <ListItem key={index}>
@@ -143,6 +164,7 @@ const CreateVideogame = () => {
       </div>
       <div>
         <label>Platforms:</label>
+        {formErrors.name && <Errors name={formErrors.name}/>}
         <ListContainer>
           {platforms.map((platform, index) => (
             <ListItem key={index} className="platform-item">
@@ -164,6 +186,7 @@ const CreateVideogame = () => {
           onChange={handleInputChange}
           value={newVideogame.releaseDate}
         />
+        {formErrors.name && <Errors name={formErrors.name}/>}
       </div>
       <StarRating>
         <label>Rating:</label>
@@ -176,6 +199,7 @@ const CreateVideogame = () => {
           onChange={(e) => handleRatingChange(parseFloat(e.target.value))}
           value={newVideogame.rating}
         />
+        {formErrors.name && <Errors name={formErrors.name}/>}
         <div>{renderStars()}</div>
       </StarRating>
       <button type="submit">Create Videogame!</button>

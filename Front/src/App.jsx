@@ -1,10 +1,10 @@
 import { Route, Routes, useLocation } from 'react-router'
 import './App.css' 
-import LandingPage from './Components/LandingPage';
 import HomePage from './Pages/HomePage';
 import DetailPage from './Pages/DetailPage';
 import FormPage from './Pages/FormPage';
 import NavBar from './Components/Navbar';
+import LandingPage from './Pages/LandingPage';
 
 function App() {
   const {pathname} = useLocation()
