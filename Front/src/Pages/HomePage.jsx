@@ -20,10 +20,11 @@ const HomePage = () => {
 
   const [filter, setFilter] = useState({ genre: "all", created: "all" });
   const [order, setOrder] = useState({prop:"name", way:"A"});
+  const videogamesPerPage = 15
 
   const [pagination, currentVideogames] = usePagination(
     videogames,
-    15,
+    videogamesPerPage,
     currentPage
   );
 
@@ -41,30 +42,35 @@ const HomePage = () => {
   }, [filter, order]);
 
   return (
-    <div>
+    <>
+      {(currentVideogames.length === videogamesPerPage) && <div>
       <div>
       </div>
       <div>
-        <label>
-          <b>Genres:</b>{" "}
-        </label>
-        <select name="genre" defaultValue="all" onChange={handleFilterOption}>
-          <option value="all">All</option>
-          {genres &&
-            genres.map((genre, index) => (
-              <option key={index} value={genre}>
-                {genre}
-              </option>
-            ))}
-        </select>
-        <label>
-          <b>Origin(API/DB):</b>{" "}
-        </label>
-        <select name="created" defaultValue="all" onChange={handleFilterOption}>
-          <option value="all">All</option>
-          <option value="true">Db</option>
-          <option value="false">API</option>
-        </select>
+        <div>
+          <label>
+            <b>Genres:</b>{" "}
+          </label>
+          <select name="genre" defaultValue="all" onChange={handleFilterOption}>
+            <option value="all">All</option>
+            {genres &&
+              genres.map((genre, index) => (
+                <option key={index} value={genre}>
+                  {genre}
+                </option>
+              ))}
+          </select>
+        </div>
+        <div>
+          <label>
+            <b>Origin(API/DB):</b>{" "}
+          </label>
+          <select name="created" defaultValue="all" onChange={handleFilterOption}>
+            <option value="all">All</option>
+            <option value="true">Db</option>
+            <option value="false">API</option>
+          </select>
+        </div>
       </div>
 
       <div>
@@ -85,7 +91,8 @@ const HomePage = () => {
 
       <Videogames videogames={currentVideogames} />
       <PaginationButtons pagination={pagination} />
-    </div>
+    </div>}
+    </>
   );
 };
 
