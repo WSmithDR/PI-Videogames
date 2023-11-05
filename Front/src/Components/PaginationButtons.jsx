@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage } from '../redux/actions/actions';
+import { StyledButton } from './../Styles/PaginationButtons';
 
 const PaginationButtons = ({ pagination }) => {
   const { currentPage, totalPages, nextPage, prevPage, goToPage } = pagination;
-  const buttonsToShow = 5
+  const buttonsToShow = 5;
   const [start, setStart] = useState(1);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const nextRange = () => {
     if (start + buttonsToShow <= totalPages) {
@@ -25,7 +26,7 @@ const PaginationButtons = ({ pagination }) => {
   useEffect(() => {
     const newStart = Math.floor((currentPage - 1) / buttonsToShow) * buttonsToShow + 1;
     setStart(newStart);
-    dispatch(setCurrentPage(currentPage))
+    dispatch(setCurrentPage(currentPage));
   }, [currentPage, buttonsToShow]);
 
   return (
@@ -37,13 +38,14 @@ const PaginationButtons = ({ pagination }) => {
         {[...Array(totalPages).keys()]
           .slice(start - 1, start + buttonsToShow - 1)
           .map((index) => (
-            <button
+            <StyledButton
               key={index}
               onClick={() => goToPage(index + 1)}
+              isActive={currentPage === index + 1}
               disabled={currentPage === index + 1}
             >
               {index + 1}
-            </button>
+            </StyledButton>
           ))}
         <button onClick={nextPage} disabled={currentPage === totalPages}>
           Next
