@@ -1,3 +1,4 @@
+/*
 :root {
   font-family: 'Press Start 2P', sans-serif;
   line-height: 1.5;
@@ -30,7 +31,7 @@ body {
   align-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('background.jpg'); /* Cambia 'background.jpg' por la imagen de tu elección */
+  background-image: url('background.jpg'); 
   background-size: cover;
 }
 
@@ -77,3 +78,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+*/

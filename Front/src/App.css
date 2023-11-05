@@ -1,3 +1,4 @@
+/*
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -44,4 +45,24 @@
 .read-the-docs {
   color: #888;
   font-style: italic;
+}
+*/
+
+
+/* styles.css */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #000000;
+    --text-color: #ffffff;
+  }
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
