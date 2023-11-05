@@ -1,30 +1,30 @@
 import { useState } from "react"
-import useData from "../Hooks/useData"
+import { useDispatch } from "react-redux"
+import { searchVideogameByName } from "../redux/actions/actions"
 
 export const SearchVideogameByName = () => {
-    const [search, setSearch] = useState("")
+    const [name, setName] = useState("")
 
     const handleInputChange = event => {
-        setSearch(event.target.value)
+        setName(event.target.value)
     }
 
-    const onSearch = (search) => {
-        const data = useData(`http://localhost:3001/videogames?name=${search}`)
-        
-    }
+    const dispatch = useDispatch()
     
-    const handleClick = ()=> {
-        onSearch(search)
+    const onSearch = () => {
+        dispatch(searchVideogameByName(name))
+        setName("")
     }
+
 
     return (
         <div>
             <input type="search" 
             placeholder="Search by name..."
             onChange={handleInputChange}
-            value ={search}
+            value ={name}
             />
-            <button onClick={handleClick}>Search</button>
+            <button onClick={onSearch}>Search</button>
         </div>
     )
 

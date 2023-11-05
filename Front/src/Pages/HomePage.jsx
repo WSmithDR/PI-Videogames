@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import usePagination from "../Hooks/usePagination";
 import PaginationButtons from "./../Components/PaginationButtons";
 import useData from "./../Hooks/useData";
+import { SearchVideogameByName } from "../Components/SearchVideogameByName";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -43,8 +44,10 @@ const HomePage = () => {
 
   return (
     <>
-      {(currentVideogames.length === videogamesPerPage) && <div>
+      {<div>
       <div>
+        <SearchVideogameByName/>
+        <button onClick={()=>dispatch(getVideogamesByDefault())}>Reset</button>
       </div>
       <div>
         <div>

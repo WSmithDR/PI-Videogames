@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./types"
 
 const vdgEndpoint = `http://localhost:3001/videogames`
 
@@ -58,4 +58,19 @@ export const renderVideogames = (filter, order) => {
         type: RENDER_VIDEOGAMES,
         payload: {filter, order}
     }
+}
+
+
+export const searchVideogameByName = name => {
+   try {
+        return async dispatch => {
+            const {data} = await axios(`${vdgEndpoint}?name=${name}`)
+            dispatch({
+                type: SEARCH_VIDEOGAME_BY_NAME,
+                payload: data
+            })
+        }
+   } catch (error) {
+        return error.message
+   }
 }

@@ -1,4 +1,4 @@
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./actions/types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./actions/types"
 
 const initialState = {
     backUpVideogames:[],
@@ -33,7 +33,6 @@ const reducer = (state=initialState, {type, payload}) => {
 
         case RENDER_VIDEOGAMES: 
         const {filter, order} = payload
-        console.log(order)
             let filtered = [...state.backUpVideogames].filter(
                 videogame => {
                     return( 
@@ -74,6 +73,13 @@ const reducer = (state=initialState, {type, payload}) => {
             }
             return {...state, renderedVideogames:[...filtered]?.sort((a,b)=>sortVideogames(a,b)) 
             }
+
+        case SEARCH_VIDEOGAME_BY_NAME: 
+                return {
+                    ...state,
+                    renderedVideogames: [...payload],
+                    backUpVideogames: [...payload]
+                }
         
         default: {
             return {...state}
