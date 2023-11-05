@@ -43,6 +43,8 @@ const HomePage = () => {
   return (
     <div>
       <div>
+      </div>
+      <div>
         <label>
           <b>Genres:</b>{" "}
         </label>
