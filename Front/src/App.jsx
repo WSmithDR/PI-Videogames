@@ -10,7 +10,7 @@ function App() {
   const {pathname} = useLocation()
   return (
     <div className='App'>
-      {pathname !== "/" && <NavBar/>}
+      {(pathname !== "/" && !pathname.includes("/detail") && pathname!=="/form") && <NavBar/>}
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/home" element={<HomePage/>}/>

@@ -6,7 +6,10 @@ export const PlatformItem = styled.li`
 `;
 
 export const StyledPlatforms = styled.ul`
-  list-style-type:"★";
-  display:flex;
-  flex-direction: column;
+  list-style-type:"⭐";
+  display:block;
+  columns:3;
+  li{
+    padding-left:1em;
+  }
 `;

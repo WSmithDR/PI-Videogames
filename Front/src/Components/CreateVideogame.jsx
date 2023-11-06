@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import useData from "../Hooks/useData";
+import useValidation from "../Hooks/useValidation";
 import {
-  StyledForm,
+  Checkbox,
+  Description,
+  Img,
   ListContainer,
   ListItem,
-  Checkbox,
-  StarRating
+  Name,
+  StarRating,
+  StyledForm
 } from "../Styles/createVideogame";
-import { useDispatch } from "react-redux";
 import { createVideogame } from "../redux/actions/actions";
-import useValidation from "../Hooks/useValidation";
 import { Errors } from "./Errors";
 
 const CreateVideogame = () => {
@@ -130,24 +133,23 @@ const CreateVideogame = () => {
       rating: 0,
       genres: []
     })
+    alert("Videogame created sucessfully!")
   };
 
-  const deleteImg = () =>{
+  const deleteImg = (event) =>{
     setNewVideogame({...newVideogame, image:""})
     const errors = validate({
       ...newVideogame,
       image:""
     })
-
     setFormErrors({...errors})
   }
-
 
   return (
     <StyledForm onSubmit={handleSubmit}>
       <div>
         <label>Name:</label>
-        <input
+        <Name
           type="text"
           name="name"
           onChange={handleInputChange}
@@ -156,7 +158,7 @@ const CreateVideogame = () => {
         {formErrors.name && <Errors name={formErrors.name}/>}
       </div>
       <div>
-        <label>Image:</label>
+        <label>Image:</label><br/>
         <input
           type="file"
           name="image"
@@ -165,11 +167,11 @@ const CreateVideogame = () => {
           onChange={changeUpload}
         />
         {newVideogame.image && <div>
-          <img
+          <Img
             src={newVideogame.image ? newVideogame.image : "Default image"}
             alt=""
             width="100px"
-            />
+            /><br/>
             <button onClick={()=>deleteImg()}>Delete</button>
         </div>}
         {formErrors.image && <Errors name={formErrors.image}/>}
@@ -177,7 +179,7 @@ const CreateVideogame = () => {
       <div>
         <label>Description:</label>
         <div>
-          <textarea
+          <Description
             type="text"
             name="description"
             cols="30"
@@ -239,9 +241,9 @@ const CreateVideogame = () => {
           name="rating"
           onChange={(event) => handleRatingChange(parseFloat(event.target.value))}
           value={newVideogame.rating}
-        />
+          />
+          {renderStars()}
         {formErrors.rating && <Errors name={formErrors.rating}/>}
-        <div>{renderStars()}</div>
       </StarRating>
       {Object.keys(formErrors).length === 0 && <button type="submit">Create Videogame!</button>}
     </StyledForm>

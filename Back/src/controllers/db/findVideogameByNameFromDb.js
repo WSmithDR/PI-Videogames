@@ -11,10 +11,12 @@ const findVideogameByNameFromDb = async (name) => {
         },
         include: [
             {
-                model: Genre
+                model: Genre,
+                as: "genres"
             },
             {
-                model: Platform
+                model: Platform,
+                as: "platforms"
             }
         ]
     })

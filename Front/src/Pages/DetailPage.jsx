@@ -1,10 +1,13 @@
+import NavButton from "../Components/NavButton"
 import VdgDetail from "../Components/VdgDetail"
+import { Details } from "../Styles/DetailPage"
 
 const DetailPage = ()=>{
     return(
-        <div>
+        <Details>
+            <NavButton name={"Back To Home"} to="/home"/>
             <VdgDetail/>
-        </div>
+        </Details>
     )
 }
 

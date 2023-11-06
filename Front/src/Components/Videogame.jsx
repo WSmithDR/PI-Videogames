@@ -11,10 +11,7 @@ import {
 const Videogame = ({ videogame }) => {
   const {id, name, image, genres } = videogame;
   const [flipped, setFlipped] = useState(false);
-
-  console.log("name", name)
-  console.log("genres", genres)
-
+  
   const handleMouseEnter = () => {
     setFlipped(true);
   };
@@ -34,7 +31,7 @@ const Videogame = ({ videogame }) => {
         </FrontSide>
           <BackSide>
             <h3>{name}</h3>
-            <h4>Genres:</h4>
+            {genres && <h4>Genres:</h4>}
             <ul>
               {genres?.map((genre) => (
                 <li key={genre.id}>{genre.name}</li>

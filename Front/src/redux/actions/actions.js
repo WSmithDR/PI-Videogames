@@ -23,7 +23,7 @@ export const createVideogame = (videogame) => {
     return async (dispatch) => {
         try {
             const {data} = await axios.post(vdgEndpoint, videogame)
-            return dispatch(
+            dispatch(
                 {
                     type: CREATE_VIDEOGAME,
                     payload: data

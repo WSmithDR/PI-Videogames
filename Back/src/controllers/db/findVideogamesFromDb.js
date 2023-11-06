@@ -6,9 +6,11 @@ const findVideogamesFromDb = async () => {
         include:[
             {
                 model:Genre,
+                as: "genres"
             },
             {
-                model: Platform
+                model: Platform,
+                as:"platforms"
             }
         ]
     })
