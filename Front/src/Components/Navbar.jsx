@@ -1,16 +1,18 @@
-import NavButton from "./NavButton"
+import { NavigationBar } from "../Styles/StyledNavbar";
+import { SearchVideogameByName } from "./../Components/SearchVideogameByName";
+import NavButton from "./NavButton";
 
 const NavBar = () => {
     const buttons = [
         {name: "Home", to:"/home"},
-        {name: "Form", to:"/form"},
-        {name: "Detail", to:"/detail/45"},
+        {name: "Create a videogame", to:"/form"}
     ]
     return (
         <div>
-            <div>
+            <NavigationBar>
                 {buttons.map(({name, to}, index) => <NavButton key={name+index} name={name} to={to}/>)}
-            </div>
+                <SearchVideogameByName/>
+            </NavigationBar>
         </div>
     )
 }

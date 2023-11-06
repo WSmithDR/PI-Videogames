@@ -1,54 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  CardWrapper,
-  CardInner,
-  CardFront,
-  CardBack,
+  BackSide,
+  CardContainer,
   CardImage,
-  CardText,
-  CardLink,
-} from "./../Styles/videogame"
+  CardInner,
+  DetailLink,
+  FrontSide
+} from "../Styles/videogame";
 
 const Videogame = ({ videogame }) => {
-  const { id, name, image, genres } = videogame;
-  const [isHovered, setIsHovered] = useState(false);
+  const {id, name, image, genres } = videogame;
+  const [flipped, setFlipped] = useState(false);
+
+  console.log("name", name)
+  console.log("genres", genres)
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    setFlipped(true);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setFlipped(false);
   };
-
   return (
-    <CardWrapper
+    <DetailLink to={`/detail/${id}`}>
+      <CardContainer
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <CardInner flipped={isHovered}>
-        <CardFront>
+      <CardInner flipped={flipped}>
+        <FrontSide>
           <CardImage src={image} alt={name} />
-        </CardFront>
-        <CardBack>
-          <CardText>
-            {name && (
-              <>
-                <b>{name}</b>
-              </>
-            )}
-            {genres && (
-              <ul>
-                {genres.map((genre, index) => (
-                  <li key={index}>{genre.name}</li>
-                ))}
-              </ul>
-            )}
-          </CardText>
-          <CardLink to={`/detail/${id}`}>Details</CardLink> {/* Agregar botón de Details */}
-        </CardBack>
+        </FrontSide>
+          <BackSide>
+            <h3>{name}</h3>
+            <h4>Genres:</h4>
+            <ul>
+              {genres?.map((genre) => (
+                <li key={genre.id}>{genre.name}</li>
+              ))}
+            </ul>
+          </BackSide>
       </CardInner>
-    </CardWrapper>
+    </CardContainer>
+    </DetailLink>
   );
 };
 

@@ -8,6 +8,7 @@ const cleanVideogamesPropsFromApi = (info) => {
                 background_image,
                 released,
                 rating,
+                Genres,
                 genres 
             })=>{
                 //const strsPlatforms = platforms.map(({platform})=>platform.name)
@@ -20,7 +21,7 @@ const cleanVideogamesPropsFromApi = (info) => {
                     image: background_image,
                     releaseDate: released,
                     rating,
-                    Genres: genres
+                    genres: Genres || genres
                 }
             })
         }else{
@@ -32,6 +33,7 @@ const cleanVideogamesPropsFromApi = (info) => {
                 background_image,
                 released,
                 rating,
+                Genres,
                 genres
             } = info
 
@@ -45,7 +47,7 @@ const cleanVideogamesPropsFromApi = (info) => {
                 image: background_image,
                 releaseDate: released,
                 rating,
-                Gneres:genres
+                genres: Genres || genres
             }
         }
 }

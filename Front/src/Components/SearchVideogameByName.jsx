@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { SearchBar } from "../Styles/SearchBar"
 import { searchVideogameByName } from "../redux/actions/actions"
 
 export const SearchVideogameByName = () => {
@@ -18,14 +19,14 @@ export const SearchVideogameByName = () => {
 
 
     return (
-        <div>
+        <SearchBar>
             <input type="search" 
             placeholder="Search by name..."
             onChange={handleInputChange}
             value ={name}
             />
             <button onClick={onSearch}>Search</button>
-        </div>
+        </SearchBar>
     )
 
 }

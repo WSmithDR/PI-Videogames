@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Videogames from "../Components/Videogames";
+import usePagination from "../Hooks/usePagination";
+import { Reset, Selection, SelectionContainer } from "../Styles/Home";
 import {
   getVideogamesByDefault,
   renderVideogames,
 } from "../redux/actions/actions";
-import { useEffect, useState } from "react";
-import usePagination from "../Hooks/usePagination";
 import PaginationButtons from "./../Components/PaginationButtons";
 import useData from "./../Hooks/useData";
-import { SearchVideogameByName } from "../Components/SearchVideogameByName";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -44,17 +44,11 @@ const HomePage = () => {
 
   return (
     <>
-      {<div>
-      <div>
-        <SearchVideogameByName/>
-        <button onClick={()=>dispatch(getVideogamesByDefault())}>Reset</button>
-      </div>
-      <div>
-        <div>
-          <label>
+      {<SelectionContainer>
+        <label>
             <b>Genres:</b>{" "}
-          </label>
-          <select name="genre" defaultValue="all" onChange={handleFilterOption}>
+        </label>
+        <Selection name="genre" defaultValue="all" onChange={handleFilterOption}>
             <option value="all">All</option>
             {genres &&
               genres.map((genre, index) => (
@@ -62,25 +56,19 @@ const HomePage = () => {
                   {genre}
                 </option>
               ))}
-          </select>
-        </div>
-        <div>
-          <label>
-            <b>Origin(API/DB):</b>{" "}
-          </label>
-          <select name="created" defaultValue="all" onChange={handleFilterOption}>
-            <option value="all">All</option>
-            <option value="true">Db</option>
-            <option value="false">API</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
+        </Selection>{" "}
+        <label>
+          <b>Origin(API/DB):</b>{" "}
+        </label>
+        <Selection name="created" defaultValue="all" onChange={handleFilterOption}>
+          <option value="all">All</option>
+          <option value="true">Db</option>
+          <option value="false">API</option>
+          </Selection>
         <label>
           <b>SORT:</b>{" "}
         </label>
-        <select onChange={handleOrderOption}>
+        <Selection onChange={handleOrderOption}>
           <optgroup label="Name">
             <option value="name A">Ascendent</option>
             <option value="name D">Descendent</option>
@@ -89,12 +77,11 @@ const HomePage = () => {
             <option value="rating A">Ascendent</option>
             <option value="rating D">Descendent</option>
           </optgroup>
-        </select>
-      </div>
-
+        </Selection>
+        <Reset onClick={()=>dispatch(getVideogamesByDefault())}>Reset</Reset>
+      </SelectionContainer>}
       <Videogames videogames={currentVideogames} />
       <PaginationButtons pagination={pagination} />
-    </div>}
     </>
   );
 };

@@ -1,5 +1,5 @@
-import Videogame from "./Videogame";
 import { VideogameContainer, VideogameItem } from "../Styles/videogames";
+import Videogame from "./Videogame";
 
 
 const Videogames = ({videogames}) => {

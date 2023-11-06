@@ -1,12 +1,14 @@
+import { StyledPlatforms } from "../Styles/Platforms"
+
 const Platforms = ({platforms}) => {
     return(
-        <ol>
+        <StyledPlatforms>
             {
                 platforms?.map((element, index) => {
                     return <li key={index}>{element.platform.name}</li>
             }
             )}
-        </ol>
+        </StyledPlatforms>
     )
 }
 

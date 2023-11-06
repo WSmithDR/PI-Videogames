@@ -38,7 +38,7 @@ const reducer = (state=initialState, {type, payload}) => {
                     return( 
                         (filter.genre==="all"
                         ? true
-                        : videogame.Genres?.some(genre=>genre.name===filter.genre)
+                        : videogame.genres?.some(genre=>genre.name===filter.genre)
                         )&&(filter.created==="all"
                         ? true
                         : filter.created==="true"? videogame.created:!videogame.created

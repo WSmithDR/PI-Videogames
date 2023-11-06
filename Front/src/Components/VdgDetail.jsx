@@ -1,5 +1,6 @@
-import { useParams } from "react-router"
+import { useParams } from "react-router";
 import useVideogame from "../Hooks/useVideogame";
+import { Description, Img, Title } from "../Styles/VdgDetail";
 import Platforms from "./Platforms";
 
 const VdgDetail = () => {
@@ -17,10 +18,10 @@ const VdgDetail = () => {
 
     return(
         <div>
-            {name && <p><strong>Name: </strong>{name}</p>}
-            <img src={image} width="300px"/>
-            {description && <p><strong>Description: </strong>{description}</p>}
-            <strong>Platforms:</strong>
+            {name && <Title>{name}</Title>}
+            <Img src={image} width="300px"/>
+            {description && <Description>{description}</Description>}
+            <p>{`${name} is available in the platforms: `}</p>
             <Platforms platforms={platforms}/>
             <p><strong>Released: </strong>
             {releaseDate}</p>
