@@ -36,7 +36,21 @@ const createVideogame = async (
         await newVideogame.addPlatform(found)
     })
     
-    const allVideogames = await Videogame.findAll()
+    const allVideogames = await Videogame.findOne({
+        where:{
+            name,
+        },
+        includes:[
+            {
+                model: Genre,
+                as: "genres"
+            },
+            {
+                model: Platform,
+                as: "platforms"
+            }
+        ]
+    })
 
     return allVideogames
 }

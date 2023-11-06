@@ -42,13 +42,19 @@ const HomePage = () => {
     dispatch(renderVideogames(filter, order));
   }, [filter, order]);
 
+  const cleanOrderFilter = () => {
+    dispatch(getVideogamesByDefault())
+    setFilter({ genre: "all", created: "all" })
+    setOrder({prop:"name", way:"A"})
+  }
+
   return (
     <>
       {<SelectionContainer>
         <label>
             <b>Genres:</b>{" "}
         </label>
-        <Selection name="genre" defaultValue="all" onChange={handleFilterOption}>
+        <Selection name="genre" defaultValue="all" onChange={handleFilterOption} value={filter.genre}>
             <option value="all">All</option>
             {genres &&
               genres.map((genre, index) => (
@@ -60,7 +66,7 @@ const HomePage = () => {
         <label>
           <b>Origin(API/DB):</b>{" "}
         </label>
-        <Selection name="created" defaultValue="all" onChange={handleFilterOption}>
+        <Selection name="created" defaultValue="all" onChange={handleFilterOption} value={filter.created}>
           <option value="all">All</option>
           <option value="true">Db</option>
           <option value="false">API</option>
@@ -78,7 +84,7 @@ const HomePage = () => {
             <option value="rating D">Descendent</option>
           </optgroup>
         </Selection>
-        <Reset onClick={()=>dispatch(getVideogamesByDefault())}>Reset</Reset>
+        <Reset onClick={cleanOrderFilter}>Reset</Reset>
       </SelectionContainer>}
       <Videogames videogames={currentVideogames} />
       <PaginationButtons pagination={pagination} />

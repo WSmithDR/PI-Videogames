@@ -14,7 +14,6 @@ export const SearchVideogameByName = () => {
     
     const onSearch = () => {
         dispatch(searchVideogameByName(name))
-        setName("")
     }
 
 
