@@ -1,31 +1,26 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Videogames from "../Components/Videogames";
-import usePagination from "../Hooks/usePagination";
+import Pagination from "../Components/Pagination";
 import { Reset, Selection, SelectionContainer } from "../Styles/Home";
 import {
   getVideogamesByDefault,
   renderVideogames
 } from "../redux/actions/actions";
-import PaginationButtons from "./../Components/PaginationButtons";
 import useData from "./../Hooks/useData";
 
 const HomePage = () => {
+
+  const videogamesPerPage = 15
   const dispatch = useDispatch();
   const videogames = useSelector((state) => state.renderedVideogames);
   const genres = useData("http://localhost:3001/genres");
+
   useEffect(() => {
     dispatch(getVideogamesByDefault());
   }, []);
 
   const [filter, setFilter] = useState({ genre: "all", created: "all" });
   const [order, setOrder] = useState({prop:"name", way:"A"});
-  const videogamesPerPage = 15
-
-  const [pagination, currentVideogames] = usePagination(
-    videogames,
-    videogamesPerPage
-  );
 
   const handleFilterOption = (event) => {
     setFilter({ ...filter, [event.target.name]: event.target.value });
@@ -84,8 +79,7 @@ const HomePage = () => {
         </Selection>
         <Reset onClick={cleanOrderFilter}>Reset</Reset>
       </SelectionContainer>}
-      <Videogames videogames={currentVideogames} />
-      <PaginationButtons pagination={pagination} />
+      <Pagination data={videogames} itemsPerPage={videogamesPerPage} />
     </>
   );
 };

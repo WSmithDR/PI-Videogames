@@ -1,13 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useCurrentItems from '../Hooks/useCurrentItems';
+import { StyledButton } from '../Styles/PaginationButtons';
 import { setCurrentPage } from '../redux/actions/actions';
-import { StyledButton } from './../Styles/PaginationButtons';
+import Videogames from './Videogames';
 
-const PaginationButtons = ({ pagination }) => {
-  const { currentPage, totalPages, nextPage, prevPage, goToPage } = pagination;
-  const buttonsToShow = 5;
+const Pagination = ({ data, itemsPerPage }) => {
+  const currentPage = useSelector(state => state.currentPage)
+  const buttonsToShow = 5
   const [start, setStart] = useState(1);
   const dispatch = useDispatch();
+
+  const currentItems = useCurrentItems(data, itemsPerPage, currentPage)
+
+
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      dispatch(setCurrentPage(currentPage + 1))
+    }
+  }
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      dispatch(setCurrentPage(currentPage - 1))
+    }
+  }
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      dispatch(setCurrentPage(page))
+    }
+  }
 
   const nextRange = () => {
     if (start + buttonsToShow <= totalPages) {
@@ -21,7 +46,7 @@ const PaginationButtons = ({ pagination }) => {
     if (start - buttonsToShow >= 1) {
       setStart(start - buttonsToShow);
     }
-  };
+  }
 
   useEffect(() => {
     const newStart = Math.floor((currentPage - 1) / buttonsToShow) * buttonsToShow + 1;
@@ -31,6 +56,9 @@ const PaginationButtons = ({ pagination }) => {
 
   return (
     <div>
+      <div>
+        <Videogames videogames={currentItems}/>
+      </div>
       <div>
         <button onClick={prevPage} disabled={currentPage === 1}>
           Prev
@@ -66,4 +94,4 @@ const PaginationButtons = ({ pagination }) => {
   );
 };
 
-export default PaginationButtons;
+export default Pagination;
