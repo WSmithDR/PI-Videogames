@@ -5,7 +5,7 @@ const Platforms = ({platforms}) => {
         <StyledPlatforms>
             {
                 platforms?.map((element, index) => {
-                    return <li key={index}>{element.platform.name}</li>
+                    return <li key={index}>{element.name}</li>
             }
             )}
         </StyledPlatforms>

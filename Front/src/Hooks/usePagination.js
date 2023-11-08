@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const usePagination = (data, itemsPerPage, currentPageFromGS) => {
+const usePagination = (data, itemsPerPage) => {
+  const currentPageFromGS = useSelector(state => state.currentPage)
   
   const [currentPage, setCurrentPage] = useState(currentPageFromGS);
   const totalPages = Math.ceil(data.length / itemsPerPage);

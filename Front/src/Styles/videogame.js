@@ -69,8 +69,8 @@ export const BackSide = styled.div`
   }
 
   ul {
-    list-style-type:"★" ; /* Elimina las viñetas de la lista */
-    padding: 0; /* Quita el espacio entre elementos li */
+    list-style-type:"★" ;
+    padding: 0; 
     text-align: center;
   }
 

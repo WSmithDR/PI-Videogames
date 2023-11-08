@@ -12,7 +12,6 @@ const findVideogamesFromApi = async () =>{
         videogames = [...videogames, ...info]
         page++
     }
-    console.log("****", videogames.length)
     return videogames
 }
 

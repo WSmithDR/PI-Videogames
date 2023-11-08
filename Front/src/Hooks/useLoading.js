@@ -1,5 +1,4 @@
-// En el archivo useLoading.js
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useLoading = () => {
   const [loading, setLoading] = useState(true);

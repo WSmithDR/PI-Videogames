@@ -5,7 +5,7 @@ import usePagination from "../Hooks/usePagination";
 import { Reset, Selection, SelectionContainer } from "../Styles/Home";
 import {
   getVideogamesByDefault,
-  renderVideogames,
+  renderVideogames
 } from "../redux/actions/actions";
 import PaginationButtons from "./../Components/PaginationButtons";
 import useData from "./../Hooks/useData";
@@ -13,7 +13,6 @@ import useData from "./../Hooks/useData";
 const HomePage = () => {
   const dispatch = useDispatch();
   const videogames = useSelector((state) => state.renderedVideogames);
-  const currentPage = useSelector((state) => state.currentPage);
   const genres = useData("http://localhost:3001/genres");
   useEffect(() => {
     dispatch(getVideogamesByDefault());
@@ -25,8 +24,7 @@ const HomePage = () => {
 
   const [pagination, currentVideogames] = usePagination(
     videogames,
-    videogamesPerPage,
-    currentPage
+    videogamesPerPage
   );
 
   const handleFilterOption = (event) => {

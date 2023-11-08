@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import backgroundImg from "./../Asssets/wallpepers/1.jpg"
+import backgroundImg from "./../Assets/wallpepers/1.jpg";
 export const PageContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -28,7 +28,7 @@ export const Title = styled.h1`
   transition: transform 0.3s;
   
   &:hover {
-    transform: scale(1.1); /* Escalado al pasar el cursor */
+    transform: scale(1.1); 
   }
 `;
 
@@ -45,6 +45,6 @@ export const EnterButton = styled.button`
   &:hover {
     background-color: #fff;
     color: #000;
-    transform: scale(1.1); /* Escalado al pasar el cursor */
+    transform: scale(1.1);
   }
 `;
