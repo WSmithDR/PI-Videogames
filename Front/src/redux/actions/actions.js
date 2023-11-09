@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE } from "./types"
 
 const vdgEndpoint = `http://localhost:3001/videogames`
 
@@ -43,15 +43,6 @@ export const setCurrentPage = page => {
         payload: page
     }
 }
-
-
-export const setItemsPerPage = itemsPerPage => {
-    return {
-        type: SET_ITEMS_PER_PAGE,
-        payload: itemsPerPage
-    }
-}
-
 
 export const renderVideogames = (filter, order) => {
     return {

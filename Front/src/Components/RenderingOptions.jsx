@@ -9,11 +9,11 @@ const RenderingOptions = () => {
     const dispatch = useDispatch()
 
     const [filter, setFilter] = useState({ genre: "all", created: "all" });
-  const [order, setOrder] = useState({prop:"name", way:"A"});
+  const [order, setOrder] = useState({prop:"name", way:"None"});
 
   useEffect(() => {
     dispatch(renderVideogames(filter, order));
-  }, [filter, order]);
+  }, [filter, order, ]);
 
     const handleFilterOption = (event) => {
         setFilter({ ...filter, [event.target.name]: event.target.value });
@@ -25,7 +25,7 @@ const RenderingOptions = () => {
       }
     const cleanOrderFilter = () => {
         setFilter({ genre: "all", created: "all" })
-        setOrder({prop:"name", way:"A"})
+        setOrder({prop:"name", way:"None"})
         dispatch(renderVideogames())
     }
 
@@ -56,17 +56,20 @@ const RenderingOptions = () => {
           <option value="false">API</option>
           </Selection>
         <label>
-          <b>SORT:</b>{" "}
+          <b>Name:</b>{" "}
         </label>
-        <Selection onChange={handleOrderOption}>
-          <optgroup label="Name">
+        <Selection onChange={handleOrderOption} defaultValue="name None">
+            <option value="name None">None</option>
             <option value="name A">Ascendent</option>
             <option value="name D">Descendent</option>
-          </optgroup>
-          <optgroup label="Rating">
+        </Selection>
+        <label>
+          <b>Rating:</b>{" "}
+        </label>
+        <Selection onChange={handleOrderOption} defaultValue="rating None">
+            <option value="rating None">None</option>
             <option value="rating A">Ascendent</option>
             <option value="rating D">Descendent</option>
-          </optgroup>
         </Selection>
         <Reset onClick={cleanOrderFilter}>Reset</Reset>
       </SelectionContainer>}

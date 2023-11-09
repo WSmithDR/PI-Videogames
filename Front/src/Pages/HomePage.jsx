@@ -7,18 +7,12 @@ import {
 } from "../redux/actions/actions";
 
 const HomePage = () => {
-
   const videogamesPerPage = 15
   const dispatch = useDispatch();
   const videogames = useSelector((state) => state.renderedVideogames);
-  
-
   useEffect(() => {
     dispatch(getVideogamesByDefault());
   }, []);
-
-
-
   return (
     <>
       <RenderingOptions/>

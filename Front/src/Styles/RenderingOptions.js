@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const SelectionContainer = styled.div`
-    display:inline-block;
+    display:block;
     margin-top:1%;
     margin-bottom:1%;
-    width:70%;
+    width:80%;
     height:auto;
+    margin-left:1%;
+    margin-right:1%;
 `;
 
 
