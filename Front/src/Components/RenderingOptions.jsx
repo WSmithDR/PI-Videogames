@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useData from "../Hooks/useData";
 import { Reset, Selection, SelectionContainer } from "../Styles/RenderingOptions";
-import { renderVideogames } from "../redux/actions/actions";
+import { renderVideogames, setCurrentPage } from "../redux/actions/actions";
 
 const RenderingOptions = () => {
     const genres = useData("http://localhost:3001/genres")
@@ -11,9 +11,7 @@ const RenderingOptions = () => {
     const [filter, setFilter] = useState({ genre: "all", created: "all" });
   const [order, setOrder] = useState({prop:"name", way:"None"});
 
-  useEffect(() => {
-    dispatch(renderVideogames(filter, order));
-  }, [filter, order, ]);
+  
 
     const handleFilterOption = (event) => {
         setFilter({ ...filter, [event.target.name]: event.target.value });
@@ -26,12 +24,16 @@ const RenderingOptions = () => {
     const cleanOrderFilter = () => {
         setFilter({ genre: "all", created: "all" })
         setOrder({prop:"name", way:"None"})
-        dispatch(renderVideogames())
+        dispatch(renderVideogames(filter, order))
     }
 
-      useEffect(() => {
-        dispatch(renderVideogames(filter, order));
-      }, [filter, order]);
+    useEffect(() => {
+      dispatch(renderVideogames(filter, order));
+    }, [filter, order]);
+
+      useEffect(()=>{
+        dispatch(setCurrentPage(1))
+      },[filter])
 
     return <>
         {<SelectionContainer>

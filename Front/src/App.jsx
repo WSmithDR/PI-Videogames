@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router';
 import './App.css';
 import NavBar from './Components/Navbar';
@@ -5,9 +7,14 @@ import DetailPage from './Pages/DetailPage';
 import FormPage from './Pages/FormPage';
 import HomePage from './Pages/HomePage';
 import LandingPage from './Pages/LandingPage';
+import { getVideogamesByDefault } from './redux/actions/actions';
 
 function App() {
   const {pathname} = useLocation()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getVideogamesByDefault());
+  }, []);
   return (
     <div className='App'>
       {(pathname !== "/" && !pathname.includes("/detail") && pathname!=="/form") && <NavBar/>}

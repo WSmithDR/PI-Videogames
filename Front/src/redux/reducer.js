@@ -3,10 +3,8 @@ import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VID
 const initialState = {
     backUpVideogames:[],
     renderedVideogames:[],
-    currentPage: 1,
-    itemsPerPage: 15
+    currentPage: 1
 }
-
 
 const reducer = (state=initialState, {type, payload}) => {
     switch(type){

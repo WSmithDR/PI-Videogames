@@ -18,8 +18,6 @@ const VdgDetail = () => {
         genres
         } = videogame
 
-        console.log(name)
-
     return(
         <DetailContainer>
             {name && <Title>{name}</Title>}

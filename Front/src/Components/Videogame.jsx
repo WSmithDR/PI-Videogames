@@ -31,12 +31,14 @@ const Videogame = ({ videogame }) => {
         </FrontSide>
           <BackSide>
             <h3>{name}</h3>
-            {genres && <h4>Genres:</h4>}
-            <ul>
+            {genres && <>
+              <h4>Genres:</h4>
+              <ul>
               {genres?.map((genre) => (
                 <li key={genre.id}>{genre.name}</li>
               ))}
-            </ul>
+              </ul>
+            </>}
           </BackSide>
       </CardInner>
     </CardContainer>

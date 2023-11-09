@@ -45,6 +45,8 @@ export const setCurrentPage = page => {
 }
 
 export const renderVideogames = (filter, order) => {
+    filter 
+    order = {prop:"name", way:"None"}
     return {
         type: RENDER_VIDEOGAMES,
         payload: {filter, order}
