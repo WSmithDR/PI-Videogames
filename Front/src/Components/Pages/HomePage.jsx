@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import Pagination from "../Components/Pagination";
-import RenderingOptions from "../Components/RenderingOptions";
+import Pagination from "../Pagination/Pagination";
+import RenderingOptions from "../Selections/RenderingOptions";
 
 const HomePage = () => {
   const videogamesPerPage = 15

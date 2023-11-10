@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { StyledButton } from "../Styles/NavButton";
+import { StyledButton } from "../../Styles/Navigation/NavButton";
 
 
 const NavButton = ({ name, to }) => {

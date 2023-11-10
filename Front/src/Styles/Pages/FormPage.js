@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NavButton from "../Components/NavButton";
+import NavButton from "../../Components/Navigation/NavButton";
 
 export const HomeButton = styled(NavButton)`
   float:left;

@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
-import useVideogame from "../Hooks/useVideogame";
-import { Description, DetailContainer, Img, Title } from "../Styles/VdgDetail";
-import Genres from "./Genres";
-import Platforms from "./Platforms";
+import useVideogame from "../../Hooks/useVideogame";
+import { Description, DetailContainer, Img, Title } from "../../Styles/Videogames/VdgDetail";
+import Genres from "../Forms/CreateVideogame/Genres";
+import Platforms from "../Forms/CreateVideogame/Platforms";
 
 
 const VdgDetail = () => {

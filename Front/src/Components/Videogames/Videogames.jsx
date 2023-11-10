@@ -1,4 +1,4 @@
-import { VideogameContainer, VideogameItem } from "../Styles/videogames";
+import { VideogameContainer, VideogameItem } from "../../Styles/Videogames/Videogames";
 import Videogame from "./Videogame";
 
 

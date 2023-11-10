@@ -1,4 +1,4 @@
-import { StyledGenres } from "../Styles/Genres"
+import { StyledGenres } from "../../../Styles/Forms/CreateVideogame/Genres"
 
 
 const Genres = ({genres}) => {

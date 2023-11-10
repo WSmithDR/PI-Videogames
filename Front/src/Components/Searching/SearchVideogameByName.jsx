@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { SearchBar } from "../Styles/SearchBar"
-import { getVideogamesByDefault, searchVideogameByName, setCurrentPage } from "../redux/actions/actions"
+import { SearchBar } from "../../Styles/Searching/SearchBar"
+import { getVideogamesByDefault, searchVideogameByName, setCurrentPage } from "../../redux/actions/actions"
 
 export const SearchVideogameByName = () => {
     const [name, setName] = useState("")

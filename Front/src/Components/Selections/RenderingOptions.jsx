@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import useData from "../Hooks/useData";
-import { Reset, Selection, SelectionContainer } from "../Styles/RenderingOptions";
-import { renderVideogames, setCurrentPage } from "../redux/actions/actions";
+import useData from "../../Hooks/useData";
+import { Reset, Selection, SelectionContainer } from "../../Styles/Selections/RenderingOptions";
+import { renderVideogames, setCurrentPage } from "../../redux/actions/actions";
 
 const RenderingOptions = () => {
     const genres = useData("http://localhost:3001/genres")

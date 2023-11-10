@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  BackSide,
-  CardContainer,
-  CardImage,
-  CardInner,
-  DetailLink,
-  FrontSide
-} from "../Styles/videogame";
+    BackSide,
+    CardContainer,
+    CardImage,
+    CardInner,
+    DetailLink,
+    FrontSide
+} from "../../Styles/Videogames/Videogame";
 
 const Videogame = ({ videogame }) => {
   const {id, name, image, genres } = videogame;

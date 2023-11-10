@@ -1,5 +1,5 @@
-import { NavigationBar } from "../Styles/StyledNavbar";
-import { SearchVideogameByName } from "./../Components/SearchVideogameByName";
+import { NavigationBar } from "../../Styles/Navigation/Navbar";
+import { SearchVideogameByName } from "../Searching/SearchVideogameByName";
 import NavButton from "./NavButton";
 
 const NavBar = () => {

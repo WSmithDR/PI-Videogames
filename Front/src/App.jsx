@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router';
 import './App.css';
-import NavBar from './Components/Navbar';
-import DetailPage from './Pages/DetailPage';
-import FormPage from './Pages/FormPage';
-import HomePage from './Pages/HomePage';
-import LandingPage from './Pages/LandingPage';
+import NavBar from './Components/Navigation/Navbar';
+import DetailPage from './Components/Pages/DetailPage';
+import FormPage from './Components/Pages/FormPage';
+import HomePage from './Components/Pages/HomePage';
+import LandingPage from './Components/Pages/LandingPage';
 import { getVideogamesByDefault } from './redux/actions/actions';
 
 function App() {

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import useData from "../Hooks/useData";
-import useValidation from "../Hooks/useValidation";
+import useData from "../../../Hooks/useData";
+import useValidation from "../../../Hooks/useValidation";
 import {
-  Checkbox,
-  Description,
-  Img,
-  ListContainer,
-  ListItem,
-  Name,
-  StarRating,
-  StyledForm
-} from "../Styles/createVideogame";
-import { createVideogame } from "../redux/actions/actions";
+    Checkbox,
+    Description,
+    Img,
+    ListContainer,
+    ListItem,
+    Name,
+    StarRating,
+    StyledForm
+} from "../../../Styles/Forms/CreateVideogame/CreateVideogame";
+import { createVideogame } from "../../../redux/actions/actions";
 import { Errors } from "./Errors";
 
 const CreateVideogame = () => {

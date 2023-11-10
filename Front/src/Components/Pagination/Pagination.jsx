@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useCurrentItems from '../Hooks/useCurrentItems';
-import { StyledButton } from '../Styles/PaginationButtons';
-import { setCurrentPage } from '../redux/actions/actions';
-import Videogames from './Videogames';
+import useCurrentItems from '../../Hooks/useCurrentItems';
+import { StyledButton } from '../../Styles/Videogames/PaginationButtons';
+import { setCurrentPage } from '../../redux/actions/actions';
+import Videogames from '../Videogames/Videogames';
 
 const Pagination = ({ data, itemsPerPage }) => {
   const currentPage = useSelector(state => state.currentPage)

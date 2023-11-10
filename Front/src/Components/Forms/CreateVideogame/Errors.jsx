@@ -1,4 +1,4 @@
-import ErrorList from "../Styles/errors"
+import ErrorList from "../../../Styles/Forms/CreateVideogame/Errors"
 
 export const Errors = ({name}) => {
     return (

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import backgroundImg from "./../Assets/wallpepers/1.jpg";
+import backgroundImg from "./../../Assets/Wallpapers/1.jpg";
 export const PageContainer = styled.div`
   width: 100%;
   height: 100vh;

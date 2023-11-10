@@ -1,5 +1,5 @@
-import CreateVideogame from "../Components/CreateVideogame"
-import { FormContainer, HomeButton } from "../Styles/FormPage"
+import { FormContainer, HomeButton } from "../../Styles/Pages/FormPage"
+import CreateVideogame from "../Forms/CreateVideogame/CreateVideogame"
 
 
 const FormPage = ()=>{

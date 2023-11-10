@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { EnterButton, PageContainer, Title } from "../Styles/landingPage";
+import { EnterButton, PageContainer, Title } from "../../Styles/Pages/LandingPage";
 
 const LandingPage = () => {
   const navigate = useNavigate();
