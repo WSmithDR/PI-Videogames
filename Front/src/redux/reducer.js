@@ -3,7 +3,9 @@ import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VID
 const initialState = {
     backUpVideogames:[],
     renderedVideogames:[],
-    currentPage: 1
+    currentPage: 1,
+    startPageRange:1,
+    buttonsToShow:5
 }
 
 const reducer = (state=initialState, {type, payload}) => {

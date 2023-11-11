@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE } from "./types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_START_PAGE_RANGE } from "./types"
 
 const vdgEndpoint = `http://localhost:3001/videogames`
 
@@ -66,4 +66,11 @@ export const searchVideogameByName = name => {
    } catch (error) {
         return error.message
    }
+}
+
+export const setStartPageRange = (number) => {
+    return {
+        type: SET_START_PAGE_RANGE,
+        payload: number
+    }
 }
