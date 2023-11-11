@@ -1,4 +1,4 @@
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./actions/types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE, SET_START_PAGE_RANGE } from "./actions/types"
 
 const initialState = {
     backUpVideogames:[],
@@ -30,6 +30,11 @@ const reducer = (state=initialState, {type, payload}) => {
             return {...state,
                 itemsPerPage: payload
         }
+
+        case SET_START_PAGE_RANGE:
+            return {...state,
+                startPageRange: payload
+            }
 
         case RENDER_VIDEOGAMES: 
         const {filter, order} = payload

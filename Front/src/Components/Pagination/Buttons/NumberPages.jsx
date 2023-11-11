@@ -1,7 +1,9 @@
+import { useDispatch } from "react-redux"
 import { setCurrentPage } from "../../../redux/actions/actions"
 
 
 const NumberPages = ({buttonsToShow, totalPages, start, currentPage}) => {
+    const dispatch = useDispatch()
     const goToPage = (page) => {
         if (page >= 1 && page <= totalPages) {
           dispatch(setCurrentPage(page))

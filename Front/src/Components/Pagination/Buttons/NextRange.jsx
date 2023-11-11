@@ -1,11 +1,14 @@
+import { useDispatch } from "react-redux";
+import { setStartPageRange } from "../../../redux/actions/actions";
 
 
 const NextRange = ({start, buttonsToShow, totalPages}) => {
+    const dispatch = useDispatch()
     const nextRange = () => {
         if (start + buttonsToShow <= totalPages) {
-          setStart(start + buttonsToShow);
+          dispatch(setStartPageRange(start + buttonsToShow))
         } else {
-          setStart(totalPages - buttonsToShow + 1);
+          dispatch(setStartPageRange(totalPages - buttonsToShow + 1))
         }
       };
     return(
