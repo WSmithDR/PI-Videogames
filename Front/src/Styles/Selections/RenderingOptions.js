@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const SelectionContainer = styled.div`
-    display:block;
-    margin-top:1%;
+    display:inline-block;
+    margin-top:0.5%;
     margin-bottom:1%;
     width:80%;
     height:auto;
@@ -20,4 +20,7 @@ export const Reset = styled.button`
     display:inline;
     height:1%;
     padding: 1%;
+    padding:0.5%;
+    padding-top:0.2%;
+    padding-bottom:0.2%;
 `;

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import useData from "../../Hooks/useData";
+import { useDispatch, useSelector } from "react-redux";
 import { Reset, Selection, SelectionContainer } from "../../Styles/Selections/RenderingOptions";
-import { renderVideogames, setCurrentPage } from "../../redux/actions/actions";
+import { getGenres, getVideogamesByDefault, renderVideogames, setCurrentPage } from "../../redux/actions/actions";
 
 const RenderingOptions = () => {
-    const genres = useData("http://localhost:3001/genres")
+    const genres = useSelector(state => state.genres)
     const dispatch = useDispatch()
 
     const [filter, setFilter] = useState({ genre: "all", created: "all" });
@@ -24,16 +23,20 @@ const RenderingOptions = () => {
     const cleanOrderFilter = () => {
         setFilter({ genre: "all", created: "all" })
         setOrder({prop:"name", way:"None"})
-        dispatch(renderVideogames(filter, order))
+        dispatch(getVideogamesByDefault())
     }
 
     useEffect(() => {
-      dispatch(renderVideogames(filter, order));
+      dispatch(renderVideogames(filter, order))
     }, [filter, order]);
 
       useEffect(()=>{
         dispatch(setCurrentPage(1))
       },[filter])
+
+      useEffect(()=>{
+        dispatch(getGenres())
+      },[])
 
     return <>
         {<SelectionContainer>
@@ -44,8 +47,8 @@ const RenderingOptions = () => {
             <option value="all">All</option>
             {genres &&
               genres.map((genre, index) => (
-                <option key={index} value={genre}>
-                  {genre}
+                <option key={index} value={genre.name}>
+                  {genre.name}
                 </option>
               ))}
         </Selection>{" "}
@@ -60,7 +63,7 @@ const RenderingOptions = () => {
         <label>
           <b>Name:</b>{" "}
         </label>
-        <Selection onChange={handleOrderOption} defaultValue="name None">
+        <Selection name="name" onChange={handleOrderOption} defaultValue="name None">
             <option value="name None">None</option>
             <option value="name A">Ascendent</option>
             <option value="name D">Descendent</option>
@@ -68,7 +71,7 @@ const RenderingOptions = () => {
         <label>
           <b>Rating:</b>{" "}
         </label>
-        <Selection onChange={handleOrderOption} defaultValue="rating None">
+        <Selection name="rating" onChange={handleOrderOption} defaultValue="rating None">
             <option value="rating None">None</option>
             <option value="rating A">Ascendent</option>
             <option value="rating D">Descendent</option>

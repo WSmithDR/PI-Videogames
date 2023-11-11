@@ -25,7 +25,7 @@ export const SearchVideogameByName = () => {
     return (
         <SearchBar>
             <input type="search" 
-            placeholder="Search by name..."
+            placeholder="name..."
             onChange={handleInputChange}
             value ={name}
             />

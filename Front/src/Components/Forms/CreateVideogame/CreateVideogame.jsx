@@ -1,23 +1,22 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import useData from "../../../Hooks/useData";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useValidation from "../../../Hooks/useValidation";
 import {
-    Checkbox,
-    Description,
-    Img,
-    ListContainer,
-    ListItem,
-    Name,
-    StarRating,
-    StyledForm
+  Checkbox,
+  Description,
+  Img,
+  ListContainer,
+  ListItem,
+  Name,
+  StarRating,
+  StyledForm
 } from "../../../Styles/Forms/CreateVideogame/CreateVideogame";
-import { createVideogame } from "../../../redux/actions/actions";
+import { createVideogame, getGenres, getPlatforms } from "../../../redux/actions/actions";
 import { Errors } from "./Errors";
 
 const CreateVideogame = () => {
-  const genres = useData("http://localhost:3001/genres");
-  const platforms = useData("http://localhost:3001/platforms");
+  const genres = useSelector(state => state.genres)
+  const platforms = useSelector(state => state.platforms)
   const [newVideogame, setNewVideogame] = useState({
     name: "",
     image: "",
@@ -27,6 +26,8 @@ const CreateVideogame = () => {
     rating: 0,
     genres: []
   });
+
+
 
   const [formErrors, setFormErrors] = useState({k:"sentinel"})
   
@@ -67,6 +68,7 @@ const CreateVideogame = () => {
       reader.readAsDataURL(file);
     }
   };
+  
   
   const toggleOption = (option, type) => {
     let options = {}
@@ -120,6 +122,11 @@ const CreateVideogame = () => {
   };
 
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getGenres())
+    dispatch(getPlatforms())
+  },[])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -200,7 +207,7 @@ const CreateVideogame = () => {
                 onChange={() => toggleOption(genre, "genres")}
                 checked={newVideogame.genres.includes(genre)}
               />
-              {genre}
+              {genre.name}
             </ListItem>
           ))}
         </ListContainer>
@@ -216,7 +223,7 @@ const CreateVideogame = () => {
                 onChange={() => toggleOption(platform, "platforms")}
                 checked={newVideogame.platforms.includes(platform)}
               />
-              {platform}
+              {platform.name}
             </ListItem>
           ))}
         </ListContainer>

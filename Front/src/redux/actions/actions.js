@@ -1,7 +1,11 @@
 import axios from "axios"
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_START_PAGE_RANGE } from "./types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, GET_GENRES, GET_PLATFORMS, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_START_PAGE_RANGE } from "./types"
 
 const vdgEndpoint = `http://localhost:3001/videogames`
+
+const genreEnpoint = "http://localhost:3001/genres"
+
+const platformEnpoint = "http://localhost:3001/platforms"
 
 export const getVideogamesByDefault = () => {
     return async (dispatch) => {
@@ -36,6 +40,34 @@ export const createVideogame = (videogame) => {
     }
 }
 
+export const getGenres = () => {
+    return async dispatch =>{
+        try {
+            const {data} = await axios(`${genreEnpoint}`)
+            dispatch( {
+                type: GET_GENRES,
+                payload: data
+            })
+        } catch (error) {
+            return error.message
+        }
+    }
+}
+
+export const getPlatforms = () => {
+    return async dispatch => {
+        try {
+            const {data} = await axios(`${platformEnpoint}`)
+            dispatch( {
+                type: GET_PLATFORMS,
+                payload: data
+            })
+        } catch (error) {
+            return error.message  
+        }
+    }
+}
+
 
 export const setCurrentPage = page => {
     return {
@@ -45,8 +77,6 @@ export const setCurrentPage = page => {
 }
 
 export const renderVideogames = (filter, order) => {
-    filter 
-    order = {prop:"name", way:"None"}
     return {
         type: RENDER_VIDEOGAMES,
         payload: {filter, order}
