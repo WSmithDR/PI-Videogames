@@ -1,17 +1,16 @@
-import { VideogameContainer, VideogameItem } from "../../Styles/Videogames/Videogames";
-import Videogame from "./Videogame";
+import { Container } from "../../Styles/Videogames/Videogames";
+import Videogame from "./Videogame/Videogame";
 
 
 const Videogames = ({videogames}) => {
   return (
-      <VideogameContainer>
+      <Container>
         {videogames &&
           videogames.map((videogame, index) => (
-            <VideogameItem key={index}>
-              <Videogame videogame={videogame} />
-            </VideogameItem>
-          ))}
-      </VideogameContainer>
+          <Videogame key={index} videogame={videogame} />
+          )
+        )}
+      </Container>
   );
 };
 

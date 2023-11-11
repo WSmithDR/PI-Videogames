@@ -1,6 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+export const Component = styled.div`
+  width: calc(16% - 10px);
+  margin-bottom: 2%;
+  margin-left:1%;
+  margin-right:1%;
+`;
+
+
 export const CardContainer = styled.div`
   perspective: 1000px;
   position: relative;

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {
-    BackSide,
-    CardContainer,
-    CardImage,
-    CardInner,
-    DetailLink,
-    FrontSide
-} from "../../Styles/Videogames/Videogame";
+  BackSide,
+  CardContainer,
+  CardImage,
+  CardInner,
+  Component,
+  DetailLink,
+  FrontSide
+} from "../../../Styles/Videogames/Videogame";
 
 const Videogame = ({ videogame }) => {
   const {id, name, image, genres } = videogame;
@@ -20,7 +21,8 @@ const Videogame = ({ videogame }) => {
     setFlipped(false);
   };
   return (
-    <DetailLink to={`/detail/${id}`}>
+    <Component>
+      <DetailLink to={`/detail/${id}`}>
       <CardContainer
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -43,7 +45,8 @@ const Videogame = ({ videogame }) => {
       </CardInner>
     </CardContainer>
     </DetailLink>
-  );
-};
+    </Component>
+  )
+}
 
 export default Videogame;

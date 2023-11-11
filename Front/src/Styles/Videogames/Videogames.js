@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
-export const VideogameContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-`;
-
-export const VideogameItem = styled.div`
-  width: calc(20% - 10px);
-  margin-bottom: 20px;
+  margin-left:2%;
+  margin-right:2%;
 `;

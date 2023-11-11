@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useCurrentItems from '../../Hooks/useCurrentItems';
+import { Container } from '../../Styles/Pagination/Pagination';
 import { setCurrentPage, setStartPageRange } from '../../redux/actions/actions';
 import Videogames from '../Videogames/Videogames';
 import PaginationButtons from './Buttons/PaginationButtons';
@@ -24,10 +25,10 @@ const Pagination = ({ data, itemsPerPage }) => {
   }, [currentPage, buttonsToShow]);
 
   return (
-    <div>
+    <Container>
       <Videogames videogames={currentItems}/>
       <PaginationButtons currentPage={currentPage} totalPages={totalPages} buttonsToShow={buttonsToShow}/>
-    </div>
+    </Container>
   );
 };
 
