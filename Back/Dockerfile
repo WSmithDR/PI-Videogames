@@ -1,5 +1,5 @@
-# Use Node.js v18
-FROM node:18
+# Use Node.js v12
+FROM node:12
 
 # Create app directory
 WORKDIR /src/app
