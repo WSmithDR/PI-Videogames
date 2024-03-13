@@ -1,15 +1,27 @@
-import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE } from "./actions/types"
+import { CREATE_VIDEOGAME, GET_DEFAULT_VIDEOGAMES, GET_GENRES, GET_PLATFORMS, RENDER_VIDEOGAMES, SEARCH_VIDEOGAME_BY_NAME, SET_CURRENT_PAGE, SET_ITEMS_PER_PAGE, SET_START_PAGE_RANGE } from "./actions/types"
 
 const initialState = {
     backUpVideogames:[],
     renderedVideogames:[],
     currentPage: 1,
-    itemsPerPage: 15
+    startPageRange:1,
+    buttonsToShow:5,
+    genres:[],
+    platforms:[]
 }
-
 
 const reducer = (state=initialState, {type, payload}) => {
     switch(type){
+        case GET_GENRES:
+            return {...state,
+                genres: payload
+        }
+
+        case GET_PLATFORMS:
+            return {...state,
+            platforms: payload
+        }
+
         case GET_DEFAULT_VIDEOGAMES:
             return {...state, 
             backUpVideogames: payload,
@@ -30,6 +42,11 @@ const reducer = (state=initialState, {type, payload}) => {
             return {...state,
                 itemsPerPage: payload
         }
+
+        case SET_START_PAGE_RANGE:
+            return {...state,
+                startPageRange: payload
+            }
 
         case RENDER_VIDEOGAMES: 
         const {filter, order} = payload
