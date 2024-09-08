@@ -6,7 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY
 } = process.env;
 
-const URL = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames` || DB_DEPLOY
+const URL =  DB_DEPLOY || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`
 
 const sequelize = new Sequelize(URL, {
   logging: false, // set to console.log to see the raw SQL queries
